@@ -14,11 +14,3 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 }
-    @RestController
-    class HelloWorldController {
-
-        @GetMapping("/")
-        public String helloWorld() {
-            return "y5dem jawou bahy !";
-        }
-    }
