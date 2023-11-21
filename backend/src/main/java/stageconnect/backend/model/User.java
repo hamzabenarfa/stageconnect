@@ -7,17 +7,17 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "offre")
+@Document(collection = "user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Offre {
+public class User {
 
     @Id
     private String id;
-    private String titre;
-    private String nomEt;
 
-
+    private String nom;
+    private String prenom;
+    private String email;
+    private String password;
 }

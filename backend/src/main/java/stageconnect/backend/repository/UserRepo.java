@@ -2,8 +2,7 @@ package stageconnect.backend.repository;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import stageconnect.backend.model.Offre;
+import stageconnect.backend.model.User;
 
-
-public interface OffreRepo extends MongoRepository<Offre, ObjectId> {
+public interface UserRepo extends MongoRepository<User, ObjectId> {
 }
