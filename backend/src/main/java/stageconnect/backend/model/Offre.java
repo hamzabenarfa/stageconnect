@@ -15,7 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Offre {
 
     @Id
-    private ObjectId id;
+    private String id;
+
     private String titre;
     private String nomEt;
 

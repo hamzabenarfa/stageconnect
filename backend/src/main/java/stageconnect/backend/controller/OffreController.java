@@ -1,5 +1,6 @@
 package stageconnect.backend.controller;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,17 @@ public class OffreController {
     public ResponseEntity<Offre> createOffre(@RequestBody Offre offre) {
         Offre createdOffre = offreService.createOffre(offre);
         return new ResponseEntity<>(createdOffre, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Offre> updateOffre(@PathVariable("id") ObjectId id, @RequestBody Offre updatedOffre) {
+        Offre updated = offreService.updateOffre(id, updatedOffre);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOffre(@PathVariable("id") ObjectId id) {
+        offreService.deleteOffre(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
