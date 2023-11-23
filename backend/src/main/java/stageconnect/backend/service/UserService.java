@@ -26,8 +26,6 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id.toHexString()));
     }
 
-
-
     public User updateUser(ObjectId id, User updatedUser) {
         Optional<User> existingUser = userRepo.findById(id);
 
@@ -42,6 +40,10 @@ public class UserService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id.toHexString());
         }
+    }
+
+    public User createUser(User newUser) {
+        return userRepo.save(newUser);
     }
 
     public void deleteUser(ObjectId id) {
