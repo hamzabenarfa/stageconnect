@@ -1,6 +1,6 @@
 const Filter = () => {
     return ( 
-        <div className="flex flex-col  p-6 bg-red-300">
+        <div className="flex flex-col justify-center  p-6 bg-red-300">
             <h1>Filter</h1>
 
             <ul>
