@@ -20,6 +20,7 @@ public class Entreprise {
     private String nom;
     private String email;
     private String adresse;
+    private String password;
 
 
 }

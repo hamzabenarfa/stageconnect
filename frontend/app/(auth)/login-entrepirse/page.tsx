@@ -5,18 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/app/(dashboard)/_components/logo";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const LoginEntreprise = () => {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
 
-  const onSubmit = () => {
-    if (user === "admin" && pwd === "admin") {
-      router.push("/main");
+  const onSubmit = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/entreprise");
+  
+      const userMatch = response.data.find((item) => user === item.email && pwd === item.password);
+  
+      if (userMatch) {
+        const userId = userMatch.id;
+        router.push(`/entreprise`); // Append user ID to the URL
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
-
   return (
     <section className="min-h-screen flex items-center justify-around overflow-hidden bg-gray-100 space-y-8 ">
       <Image

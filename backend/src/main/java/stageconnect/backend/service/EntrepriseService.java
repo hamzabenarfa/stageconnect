@@ -33,6 +33,7 @@ public class EntrepriseService {
             entrepriseToUpdate.setNom(updatedEntreprise.getNom());
             entrepriseToUpdate.setEmail(updatedEntreprise.getEmail());
             entrepriseToUpdate.setAdresse(updatedEntreprise.getAdresse());
+            entrepriseToUpdate.setPassword(updatedEntreprise.getPassword());
             return entrepriseRepo.save(entrepriseToUpdate);
         } else {
             // Handle case where the Offre with the given ID is not found
