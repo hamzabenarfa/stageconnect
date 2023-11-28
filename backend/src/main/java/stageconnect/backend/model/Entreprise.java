@@ -22,5 +22,8 @@ public class Entreprise {
     private String adresse;
     private String password;
 
+    private boolean status=false;
+
+
 
 }

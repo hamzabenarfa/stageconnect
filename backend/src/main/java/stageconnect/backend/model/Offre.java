@@ -24,4 +24,5 @@ public class Offre {
     private String img;
 
 
+
 }
