@@ -16,8 +16,9 @@ const Navbar = () => {
         <Button variant="ghost">Contact</Button>
       </div>
       <div className="hidden md:block">
-      <Link href="/login"> <Button variant="hero">Login</Button></Link> 
-        <Button variant="hero">Sign Up</Button>
+      <Link href="/loginET"> <Button variant="hero">Login student</Button></Link> 
+      <Link href="/registerET"> <Button variant="hero">Sign Up student</Button></Link> 
+
       </div>
 
       <Menu size={30} className="md:hidden text-gray-600" />

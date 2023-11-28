@@ -6,6 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import stageconnect.backend.model.User;
 import stageconnect.backend.service.AuthService;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.Map;
 
@@ -18,6 +22,7 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
+    @CrossOrigin(origins = "http://localhost:3000")
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User newUser) {
