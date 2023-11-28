@@ -6,7 +6,7 @@ import { Logo } from "@/app/(dashboard)/_components/logo";
 import Image from "next/image";
 import Link from "next/link";
 
-const Login = () => {
+const LoginEntreprise = () => {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -68,7 +68,7 @@ const Login = () => {
             className="w-full"
             asChild
           >
-            <Link href="/login-entrepirse">Log In As Entreprise</Link>
+            <Link href="/login">Log In As User</Link>
           </Button>
         </div>
       </div>
@@ -76,4 +76,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginEntreprise;

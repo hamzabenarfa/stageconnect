@@ -22,6 +22,12 @@ export const routes = [
         label:"gestion offres ",
         href:"/gestion-offres"
     },
+    {
+        icon: BarChart4,
+        label:"Statistique ",
+        href:"/stat"
+    },
+ 
  
   
 ];

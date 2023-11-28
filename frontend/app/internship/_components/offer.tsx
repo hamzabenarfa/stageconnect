@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
+
+
 interface OfferProps {
-    img: string;
+    img: string | "...";
     company: string;
     title: string;
     duration: number;
@@ -14,12 +16,13 @@ const Offer = ({ img, company, paid, title, duration, place }: OfferProps) => {
     return (
         <div className="w-full md:w-[60%] grid grid-cols-3 md:grid-cols-7 place-items-center gap-4 p-2 rounded-2xl m-1 border-[3px] border-gray-200">
             <div className="col-span-1">
-                <Image
+                {/* <Image
                     src={img}
                     width={64}
                     height={64}
                     alt={company}
-                />
+                /> */}
+                <img src={img} alt={company} className='w-16 h-16 rounded-full' />
             </div>
             <div className="col-span-2 justify-self-start">
                 <h1 className='font-semibold '>{title}</h1>

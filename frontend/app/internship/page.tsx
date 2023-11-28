@@ -8,7 +8,7 @@ const Internship = () => {
 
     <section className="flex flex-col min-h-screen">
       
-        <Filter />
+        {/* <Filter /> */}
       
         <Picks />
       

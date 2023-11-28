@@ -6,39 +6,90 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.multipart.MultipartFile;
 import stageconnect.backend.model.Offre;
+import stageconnect.backend.service.ImageService;
 import stageconnect.backend.service.OffreService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/offre")
+@CrossOrigin(origins = "http://localhost:3000")
 public class OffreController {
 
     @Autowired
     private OffreService offreService;
 
+    @Autowired
+    private ImageService imageService;
+    private String image;
+
     @GetMapping
-    public ResponseEntity<List<Offre>> getAllPosts() {
-        List<Offre> offres = offreService.getAllOffre();
-        return new ResponseEntity<>(offres, HttpStatus.OK);
+    public ResponseEntity<List<Offre>> getAllOffres() {
+        try {
+            List<Offre> offres = offreService.getAllOffre();
+            return new ResponseEntity<>(offres, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping
-    public ResponseEntity<Offre> createOffre(@RequestBody Offre offre) {
-        Offre createdOffre = offreService.createOffre(offre);
-        return new ResponseEntity<>(createdOffre, HttpStatus.CREATED);
+    public ResponseEntity<Object> createOffre(@RequestBody Offre offre) {
+        try {
+            Offre createdOffre = offreService.createOffre(offre);
+            return new ResponseEntity<>(createdOffre, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Offre> updateOffre(@PathVariable("id") ObjectId id, @RequestBody Offre updatedOffre) {
-        Offre updated = offreService.updateOffre(id, updatedOffre);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    public ResponseEntity<Object> updateOffre(@PathVariable("id") ObjectId id, @RequestBody Offre updatedOffre) {
+        try {
+            Offre updated = offreService.updateOffre(id, updatedOffre);
+            if (updated != null) {
+                return new ResponseEntity<>(updated, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Offre not found with id: " + id.toHexString(), HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOffre(@PathVariable("id") ObjectId id) {
-        offreService.deleteOffre(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Object> deleteOffre(@PathVariable("id") ObjectId id) {
+        try {
+            offreService.deleteOffre(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+    @DeleteMapping("/all")
+    public ResponseEntity<Object> deleteAllOffres() {
+        try {
+            offreService.deleteAllOffres();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/uploadImage/{id}")
+    public ResponseEntity<Object> uploadImage(@PathVariable("id") ObjectId id, @RequestParam("file") MultipartFile file) {
+        try {
+            Offre updatedOffre = offreService.updateImage(id, file);
+            return new ResponseEntity<>(updatedOffre, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
 }

@@ -16,8 +16,12 @@ public class Offre {
 
     @Id
     private String id;
-    private String titre;
-    private String nomEt;
+    private String title;
+    private String company;
+    private String place;
+    private Integer duration;
+    private boolean paid;
+    private String img;
 
 
 }
