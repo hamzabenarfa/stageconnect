@@ -11,14 +11,15 @@ const Login = () => {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
-
   const onSubmit = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/user");
-      console.log("🚀 ~ file: page.tsx:18 ~ onSubmit ~ response:", response.data)
-
-      if (response.data.map((item)=>{user === item.email && pwd === item.password})) {
-        router.push("/user"); 
+  
+      const userMatch = response.data.find((item) => user === item.email && pwd === item.password);
+  
+      if (userMatch) {
+        const userId = userMatch.id;
+        router.push(`/user/${userId}`); // Append user ID to the URL
       } else {
         console.error("Login failed");
       }
@@ -26,6 +27,7 @@ const Login = () => {
       console.error("Error during login:", error);
     }
   };
+  
 
 
   return (
