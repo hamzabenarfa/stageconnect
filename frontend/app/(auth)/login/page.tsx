@@ -5,17 +5,28 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/app/(dashboard)/_components/logo";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const Login = () => {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
 
-  const onSubmit = () => {
-    if (user === "admin" && pwd === "admin") {
-      router.push("/main");
+  const onSubmit = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/user");
+      console.log("🚀 ~ file: page.tsx:18 ~ onSubmit ~ response:", response.data)
+
+      if (response.data.map((item)=>{user === item.email && pwd === item.password})) {
+        router.push("/user"); 
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
+
 
   return (
     <section className="min-h-screen flex items-center justify-around overflow-hidden bg-gray-100 space-y-8 ">
