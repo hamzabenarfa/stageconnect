@@ -3,7 +3,7 @@ import SideBar from "./_component/SideBar";
 
 const EntrepriseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col md:flex-row  p-4 min-h-screen backdrop-blur-3xl bg-gray-500/30    ">
+    <div className="flex flex-col md:flex-row  p-4 min-h-screen backdrop-blur-3xl bg-gray-500/30  overflow-hidden">
       <div className="hidden md:flex ">
         <SideBar />
       </div>

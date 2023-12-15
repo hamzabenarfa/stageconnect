@@ -42,7 +42,7 @@ export const options= {
 
 const JobSummary = () => {
   return (
-    <div className="flex flex-col justify-center items-start gap-4 w-1/4  rounded-3xl p-8 bg-white">
+    <div className="flex flex-col justify-start items-start gap-4 rounded-3xl py-8 px-12 bg-white">
       <div className="text-black font-bold text-2xl">Job Summary</div>
       <Doughnut data={data} options={options} />
       <div className="flex justify-around w-full mt-4">

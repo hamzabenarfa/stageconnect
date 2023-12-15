@@ -35,5 +35,6 @@ export const items = [
       method: "Email",
       amount: 320.00,
     },
+    
   ];
   
