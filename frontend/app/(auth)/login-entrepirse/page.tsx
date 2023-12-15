@@ -16,7 +16,7 @@ const LoginEntreprise = () => {
     try {
       const response = await axios.get("http://localhost:8080/api/entreprise");
   
-      const userMatch = response.data.find((item) => user === item.email && pwd === item.password);
+      const userMatch = response.data.find((item: { email: string; password: string; }) => user === item.email && pwd === item.password);
   
       if (userMatch) {
         const userId = userMatch.id;
