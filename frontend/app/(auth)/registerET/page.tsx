@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import authService from "../../../services/Auth.service"; // Replace with the correct path
+import authService from "../../../services/Auth.service"; 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/app/(dashboard)/_components/logo";
 import Image from "next/image";
@@ -18,7 +18,6 @@ const Register = () => {
   const onSubmit = async () => {
     try {
       const userData = await authService.register(nom, prenom, email, password);
-    
       router.push("/");
     } catch (error) {
       // console.log(error.response.data.message)

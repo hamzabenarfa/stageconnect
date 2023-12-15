@@ -19,7 +19,7 @@ const Login = () => {
   
       if (userMatch) {
         const userId = userMatch.id;
-        router.push(`/user/${userId}`); // Append user ID to the URL
+        router.push(`/user/${userId}`); 
       } else {
         console.error("Login failed");
       }
