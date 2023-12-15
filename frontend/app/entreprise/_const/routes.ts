@@ -1,8 +1,8 @@
-import { Briefcase, Home, CheckSquare } from "lucide-react";
+import { Briefcase, LayoutDashboard, Users } from "lucide-react";
 
 export const routes = [
     {
-       icon: Home,
+       icon: LayoutDashboard,
        title:"Dashboard",
        lien:"/entreprise"
     },
@@ -12,9 +12,9 @@ export const routes = [
         lien:"/gestion"
     }, 
     {
-        icon: CheckSquare,
-        title:"Accept",
-        lien:"/Accept"
+        icon: Users,
+        title:"Candidates",
+        lien:"/Candidates"
     },
     
 
