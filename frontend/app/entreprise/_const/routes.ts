@@ -1,4 +1,4 @@
-import { Briefcase, LayoutDashboard, Users } from "lucide-react";
+import { Briefcase, Calendar, LayoutDashboard, Users } from "lucide-react";
 
 export const routes = [
     {
@@ -16,6 +16,11 @@ export const routes = [
         title:"Candidates",
         lien:"/Candidates"
     },
+    {
+        icon: Calendar,
+        title:"Calendar",
+        lien:"/Calendar"
+    }
     
 
 
