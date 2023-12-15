@@ -10,10 +10,7 @@ const EntrepriseLayout = ({ children }: { children: React.ReactNode }) => {
 
       <main className="flex flex-col w-full p-2 md:mx-2 space-y-4 ">
         <Navbar />
-        <div className="h-full rounded-3xl">
-        
-        {children}
-        </div>
+        <div className="h-full rounded-3xl">{children}</div>
       </main>
     </div>
   );

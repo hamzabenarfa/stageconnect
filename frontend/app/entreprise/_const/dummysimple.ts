@@ -17,12 +17,7 @@ export const items = [
       method: "Online",
       amount: 350.00,
     },
-    {
-      title: "Graphic Designer",
-      application: "Company E",
-      method: "In-person",
-      amount: 180.00,
-    },
+  
     {
       title: "Marketing Specialist",
       application: "Company F",

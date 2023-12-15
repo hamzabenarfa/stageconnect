@@ -9,7 +9,7 @@ export const routes = [
     {
         icon: Briefcase,
         title:"Postuler",
-        lien:"/gestion"
+        lien:"/entreprise/postuler"
     }, 
     {
         icon: Users,
