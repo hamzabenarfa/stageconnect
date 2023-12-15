@@ -20,8 +20,8 @@ const Register = () => {
       const userData = await authService.register(nom, prenom, email, password);
       router.push("/");
     } catch (error) {
-      // console.log(error.response.data.message)
-      setError(error.response.data.message);
+      console.log(error);
+     
     }
   };
 
