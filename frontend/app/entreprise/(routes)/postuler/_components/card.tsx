@@ -1,9 +1,19 @@
 "use client";
 import axios from "axios";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Cherry } from "lucide-react";
 import Toast from "react-hot-toast";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import Modify from "./Modify";
 
@@ -15,11 +25,15 @@ interface CardProps {
 }
 
 const Card = ({ id, title, place, duration }: CardProps) => {
+  const [open, setOpen] = useState(false);
   const deleteOffer = async (offerId: string) => {
     try {
-      const res = await axios.delete(`http://localhost:8080/api/offre/${offerId}`);
+      const res = await axios.delete(
+        `http://localhost:8080/api/offre/${offerId}`
+      );
       if (res) {
         Toast.success("Offer deleted Successfully");
+        setOpen(false)
       }
     } catch (error) {
       Toast.error("Error");
@@ -44,16 +58,26 @@ const Card = ({ id, title, place, duration }: CardProps) => {
       </div>
 
       <div className="flex flex-col gap-1">
-        
-        <Modify 
-          id={id}
-          title={title}
-          place={place}
-          duration={duration}
-        />
-        <Button variant="destructive" onClick={() => deleteOffer(id)}>
-          Delete
-        </Button>
+        <Modify id={id} title={title} place={place} duration={duration} />
+
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button variant="destructive" >
+              Delete
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Delete offer</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete this offer?
+              </DialogDescription>
+            </DialogHeader>
+            <Button variant="warning" onClick={() => deleteOffer(id)}>Yes</Button>
+            <Button variant="secondary" onClick={()=> setOpen(false)}>No</Button>
+          </DialogContent>
+        </Dialog>
+
       </div>
     </div>
   );

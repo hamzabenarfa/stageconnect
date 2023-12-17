@@ -51,6 +51,7 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
   const [place, setPlace] = useState(initialPlace);
   const [duration, setDuration] = useState(initialDuration);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -80,6 +81,7 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
         if (res) {
           await toast.success("Offer added Successfully");
           setLoading(false);
+          setOpen(false)
 
         } else {
           setLoading(false);
@@ -93,7 +95,7 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
     
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
       <Button variant="secondary">Modify</Button>
       </DialogTrigger>
@@ -152,11 +154,12 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
             <FormItem>
               <FormLabel>Duration</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your duration"
+                <Input   
+                  type="number"       
                   {...field}
                   onChange={(e) => setDuration(parseInt(e.target.value))}
                   required
+                  // placeholder={duration.toString()}
                   value={duration}
                 />
               </FormControl>
