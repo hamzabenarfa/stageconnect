@@ -4,13 +4,7 @@ import axios from "axios";
 
 import AddBtn from "./_components/AddBtn";
 import Card from "./_components/card";
-
-interface DataItem {
-  id: string;
-  title: string;
-  place: string;
-  duration: number;
-}
+import { DataItem } from "@/types/entreprise";
 
 const Postuler = () => {
   const [data, setData] = useState<DataItem[]>([]);
@@ -37,6 +31,7 @@ const Postuler = () => {
           title={item.title}
           place={item.place}
           duration={item.duration}
+          description={item.description}
         />
       ))}
       <AddBtn />

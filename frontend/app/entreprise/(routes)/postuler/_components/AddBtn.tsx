@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
 
 import { PlusCircle } from "lucide-react";
 import {
@@ -29,6 +29,7 @@ import { Button } from "@/components/ui/button";
 
 import toast from "react-hot-toast";
 import { Spinner } from "@/components/spinner";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   title: z.string().min(8, {
@@ -40,6 +41,9 @@ const formSchema = z.object({
   duration: z.number().min(1, {
     message: "number must not be empty.",
   }),
+  description: z.string().min(100, {
+    message: "description must be at least 8 characters.",
+  }),
 });
 
 const AddBtn = () => {
@@ -47,6 +51,7 @@ const AddBtn = () => {
   const [title, setTitle] = useState("");
   const [place, setPlace] = useState("");
   const [duration, setDuration] = useState(0);
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -68,6 +73,7 @@ const AddBtn = () => {
         title,
         place,
         duration,
+        description,
         entreprise: {
           id: "6578003e79ca3766c33afbc4",
         },
@@ -151,6 +157,24 @@ const AddBtn = () => {
                       {...field}
                       onChange={(e) => setDuration(parseInt(e.target.value))}
                       required
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={(field) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      onChange={(e) => setDescription(e.target.value)}
+                      required
+                      value={description}
                     />
                   </FormControl>
                   <FormMessage />

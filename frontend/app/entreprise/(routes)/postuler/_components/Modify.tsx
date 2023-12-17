@@ -35,21 +35,21 @@ const formSchema = z.object({
   duration: z.number().min(1, {
     message: "number must not be empty.",
   }),
+  description: z.string().min(100, {
+    message: "description must be at least 8 characters.",
+  }),
 });
 
 
-interface DataItem {
-  id: string;
-  title: string;
-  place: string;
-  duration: number;
-}
+import { DataItem } from "@/types/entreprise";
+import { Textarea } from "@/components/ui/textarea";
 
 
-const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initialDuration }: DataItem) => {
+const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initialDuration ,description:initialDescription }: DataItem) => {
   const [title, setTitle] = useState(initialTitle);
   const [place, setPlace] = useState(initialPlace);
   const [duration, setDuration] = useState(initialDuration);
+  const [description, setDescription] = useState(initialDescription);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false)
 
@@ -59,6 +59,7 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
       title: "",
       place: "",
       duration: 0,
+      description:"",
     },
   });
 
@@ -73,6 +74,7 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
           title,
           place,
           duration,
+          description,
           entreprise: {
             id: "6578003e79ca3766c33afbc4",
           },
@@ -159,8 +161,25 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
                   {...field}
                   onChange={(e) => setDuration(parseInt(e.target.value))}
                   required
-                  // placeholder={duration.toString()}
                   value={duration}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        /> 
+         <FormField
+          control={form.control}
+          name="description"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea   
+                  {...field}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  value={description}
                 />
               </FormControl>
               <FormMessage />
