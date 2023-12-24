@@ -1,6 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 
 interface UserData {
+  email: string;
+  password: string;
 }
 
 class AuthService {
@@ -18,7 +20,7 @@ class AuthService {
   public async login(email: string, password: string): Promise<UserData> {
     try {
       const response = await this.http.post<UserData>("/login", { email, password });
-      localStorage.setItem("user", JSON.stringify(response.data));
+      
       return response.data;
     } catch (error) {
       console.error("Login failed:", error);
@@ -28,7 +30,6 @@ class AuthService {
 
   public async register(nom: string, prenom: string, email: string, password: string): Promise<UserData> {
     try {
-      console.log(nom,prenom,email, password)
       const response = await this.http.post<UserData>("/register", { nom,prenom,email, password });
       return response.data;
     } catch (error) {

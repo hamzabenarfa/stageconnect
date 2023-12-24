@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 
 interface OfferProps {
+  id: string;
   img: string | "...";
   company: string;
   title: string;
@@ -43,6 +44,7 @@ const Picks = () => {
     
     {offers && offers.map((item)=>(
             <Offer 
+                id={item.id}
                 key={item.title}
                 img={item.img}
                 company={item.company}

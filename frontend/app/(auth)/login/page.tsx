@@ -2,36 +2,41 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/app/(dashboard)/_components/logo";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
+import Toast from "react-hot-toast";
+import authService from "@/services/Auth.service";
 
 const Login = () => {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
+
   const onSubmit = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/user");
-  
-      const userMatch = response.data.find((item: { email: string; password: string; }) => user === item.email && pwd === item.password);
-  
-      if (userMatch) {
-        const userId = userMatch.id;
-        router.push(`/user/${userId}`); 
+      const userData = await authService.login(user, pwd);
+
+      if (userData) {
+        if (userData.role === "student") {
+          localStorage.setItem("student", userData.id);
+          router.push("/student");
+        } 
+        else if (userData.role === "entreprise") {
+          localStorage.setItem("entreprise", userData.id);
+          router.push("/entreprise");
+        }
+
+        Toast.success("Login successful");
       } else {
-        console.error("Login failed");
+        Toast.error("Wrong Credentials");
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      Toast.error("Bad request");
     }
   };
-  
-
 
   return (
-    <section className="min-h-screen flex items-center justify-around overflow-hidden bg-gray-100 space-y-8 ">
+    <section className="min-h-screen flex items-center justify-between pr-10 overflow-hidden bg-gray-100 space-y-8 ">
       <Image
         src="/login.png"
         alt="Picture of the author"
@@ -39,19 +44,14 @@ const Login = () => {
         height={600}
         className="hidden md:block"
       />
-      <div className=" px-10 shadow-md rounded-2xl h-[90vh]  bg-white flex flex-col items-center justify-around ">
-        <div className="flex flex-col items-center space-y-4">
-          <Logo />
 
-          <div className="flex flex-col items-center justify-center ">
-            <h1 className="text-2xl md:text-5xl font-semibold">
-              Welcome back!
-            </h1>
-            <p className="text-xs md:text-sm text-gray-400">
-              Please enter your details
-            </p>
-          </div>
+      <div className="max-w-lg w-full px-10 shadow-md rounded-2xl h-[90vh] bg-white flex flex-col items-center justify-around ">
+        <div className="flex flex-col items-center">
+          <p className="font-bold text-5xl text-blue-400">
+            <Link href="/">Stage Connect</Link>
+          </p>
         </div>
+
         <form className="w-full">
           <div className="flex flex-col items-center justify-center mt-4">
             <input
@@ -70,20 +70,10 @@ const Login = () => {
             />
           </div>
         </form>
-        <div className="space-y-2">
-          <Button type="button" onClick={onSubmit} className="w-full">
-            Log In
-          </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={onSubmit}
-            className="w-full"
-            asChild
-          >
-            <Link href="/login-entrepirse">Log In As Entreprise</Link>
-          </Button>
-        </div>
+
+        <Button type="button" onClick={onSubmit} className="w-full">
+          Log In
+        </Button>
       </div>
     </section>
   );

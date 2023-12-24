@@ -16,8 +16,7 @@ const Navbar = () => {
         <Button variant="ghost">Contact</Button>
       </div>
       <div className="hidden md:block">
-      <Link href="/login"> <Button variant="hero">Login </Button></Link> 
-      <Link href="/register"> <Button variant="hero">Sign Up </Button></Link> 
+      <Link href="/login"> <Button variant="hero" >Login </Button></Link> 
 
       </div>
 

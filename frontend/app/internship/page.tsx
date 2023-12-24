@@ -4,16 +4,14 @@ import Picks from "./_components/picks";
 const Internship = () => {
   return (
     <div>
-    <Navbar />
+      <Navbar />
 
-    <section className="flex flex-col min-h-screen">
-      
+      <section className="flex flex-col min-h-screen">
         {/* <Filter /> */}
-      
+
         <Picks />
-      
-    </section>
-  </div>
+      </section>
+    </div>
   );
 };
 

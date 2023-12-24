@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 
 interface OfferProps {
+    id: string;
     img: string | "...";
     company: string;
     title: string;
@@ -11,7 +12,7 @@ interface OfferProps {
     paid: boolean;
 }
 
-const Offer = ({ img, company, paid, title, duration, place }: OfferProps) => {
+const Offer = ({ id,img, company, paid, title, duration, place }: OfferProps) => {
     return (
         <div className="w-full md:w-[60%] grid grid-cols-3 md:grid-cols-7 place-items-center gap-4 p-2 rounded-2xl m-1 border-[3px] border-gray-200">
             <div className="col-span-1">

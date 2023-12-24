@@ -5,6 +5,7 @@ import axios from "axios";
 import AddBtn from "./_components/AddBtn";
 import Card from "./_components/card";
 import { DataItem } from "@/types/entreprise";
+import Toast from "react-hot-toast";
 
 const Postuler = () => {
   const [data, setData] = useState<DataItem[]>([]);
@@ -15,7 +16,7 @@ const Postuler = () => {
         const res = await axios.get("http://localhost:8080/api/offre");
         setData(res.data);
       } catch (error) {
-        console.log(error);
+        Toast.error("error");
       }
     };
     getData();
