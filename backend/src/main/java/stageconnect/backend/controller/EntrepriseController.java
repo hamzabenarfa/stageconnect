@@ -7,9 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import stageconnect.backend.model.Entreprise;
-import stageconnect.backend.model.Offre;
+import stageconnect.backend.repository.EntrepriseRepo;
 import stageconnect.backend.service.EntrepriseService;
-import stageconnect.backend.service.OffreService;
 
 import java.util.List;
 
@@ -22,10 +21,18 @@ public class EntrepriseController {
     @Autowired
     private EntrepriseService entrepriseService;
 
+    @Autowired
+    private EntrepriseRepo entrepriseRepo;
     @GetMapping
     public ResponseEntity<List<Entreprise>> getAllPosts() {
         List<Entreprise> entreprises= entrepriseService.getAllEntreprise();
         return new ResponseEntity<>(entreprises, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Entreprise> getEntrepriseById(@PathVariable("id") ObjectId id) {
+        Entreprise entreprise = entrepriseService.getEntrepriseById(id);
+        return new ResponseEntity<>(entreprise, HttpStatus.OK);
     }
 
     @PostMapping
@@ -45,4 +52,5 @@ public class EntrepriseController {
         entrepriseService.deleteEntreprise(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

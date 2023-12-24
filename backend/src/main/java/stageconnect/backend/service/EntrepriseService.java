@@ -3,9 +3,7 @@ package stageconnect.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stageconnect.backend.model.Entreprise;
-import stageconnect.backend.model.Offre;
 import stageconnect.backend.repository.EntrepriseRepo;
-import stageconnect.backend.repository.OffreRepo;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +18,15 @@ public class EntrepriseService {
     public List<Entreprise> getAllEntreprise() {
         return entrepriseRepo.findAll();
     }
+    public Entreprise getEntrepriseById(ObjectId id) {
+        Optional<Entreprise> entreprise = entrepriseRepo.findById(id);
+        if (entreprise.isPresent()) {
+            return entreprise.get();
+        } else {
+
+            throw new RuntimeException("Entreprise not found with id: " + id.toHexString());
+        }
+    }
 
     public Entreprise createEntreprise(Entreprise entreprise) {
         return entrepriseRepo.save(entreprise);
@@ -31,9 +38,7 @@ public class EntrepriseService {
         if (existingEntreprise.isPresent()) {
             Entreprise entrepriseToUpdate = existingEntreprise.get();
             entrepriseToUpdate.setNom(updatedEntreprise.getNom());
-            entrepriseToUpdate.setEmail(updatedEntreprise.getEmail());
             entrepriseToUpdate.setAdresse(updatedEntreprise.getAdresse());
-            entrepriseToUpdate.setPassword(updatedEntreprise.getPassword());
             return entrepriseRepo.save(entrepriseToUpdate);
         } else {
             // Handle case where the Offre with the given ID is not found
@@ -44,4 +49,7 @@ public class EntrepriseService {
     public void deleteEntreprise(ObjectId id) {
         entrepriseRepo.deleteById(id);
     }
+
+
+
 }

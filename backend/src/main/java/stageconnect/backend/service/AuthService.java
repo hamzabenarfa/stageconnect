@@ -7,6 +7,9 @@ import org.springframework.web.server.ResponseStatusException;
 import stageconnect.backend.model.User;
 import stageconnect.backend.repository.UserRepo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthService {
 
@@ -18,20 +21,24 @@ public class AuthService {
     }
 
     public User register(User newUser) {
-        // Check if the user with the provided email already exists
         if (userRepo.existsByEmail(newUser.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this email already exists");
         }
-        // You might want to hash the password before saving it in the database
+
         return userRepo.save(newUser);
     }
 
-    public User login(String email, String password) {
+    public  Map<String, Object> login(String email, String password) {
         User user = userRepo.findByEmailAndPassword(email, password);
+
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
         }
-        // Here, you might want to generate and return a token for successful login
-        return user;
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("role", user.getRole());
+        response.put("id", user.getId());
+
+        return response;
     }
 }

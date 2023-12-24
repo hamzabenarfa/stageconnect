@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/offre")
-@CrossOrigin(origins = "http://localhost:3000")
 public class OffreController {
 
     @Autowired
@@ -80,15 +79,15 @@ public class OffreController {
         }
     }
 
-    @PostMapping("/uploadImage/{id}")
-    public ResponseEntity<Object> uploadImage(@PathVariable("id") ObjectId id, @RequestParam("file") MultipartFile file) {
-        try {
-            Offre updatedOffre = offreService.updateImage(id, file);
-            return new ResponseEntity<>(updatedOffre, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/uploadImage/{id}")
+//    public ResponseEntity<Object> uploadImage(@PathVariable("id") ObjectId id, @RequestParam("file") MultipartFile file) {
+//        try {
+//            Offre updatedOffre = offreService.updateImage(id, file);
+//            return new ResponseEntity<>(updatedOffre, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 
 
