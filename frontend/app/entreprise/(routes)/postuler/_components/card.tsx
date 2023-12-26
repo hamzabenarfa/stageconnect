@@ -39,7 +39,7 @@ const Card = ({ id, title, place, duration,description }: DataItem) => {
   return (
     <div
       className="flex flex-col h-full px-5 py-4 bg-white
-                    w-full xl:w-[60%] 2xl:w-[40%]  rounded-3xl "
+                   md:max-w-xl w-full rounded-3xl "
     >
       <div className="flex flex-row justify-between items-center">
         <div className="flex gap-2 ">

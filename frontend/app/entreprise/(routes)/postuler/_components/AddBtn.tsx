@@ -104,7 +104,7 @@ const AddBtn = () => {
         <DialogHeader>
           <DialogTitle>Add offer</DialogTitle>
           <DialogDescription>
-            Add an offer of internship. Click save when you're done.
+            Add an offer of internship. Click save when you`&apos;re done.
           </DialogDescription>
         </DialogHeader>
 

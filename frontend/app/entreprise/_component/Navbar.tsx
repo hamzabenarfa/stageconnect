@@ -4,8 +4,10 @@ import { Bell, ChevronDown, Search } from "lucide-react";
 import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 const Navbar = () => {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>({});
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,21 +15,21 @@ const Navbar = () => {
 
       try {
         const res = await axios.get(`http://localhost:8080/api/user/${entrepriseId}`);
-        setData(res.data);
+         setData(res.data);     
       } catch (err) {
         console.log(err);
       }
     };
 
-    fetchData(); 
+    fetchData();
   }, []);
-    
 
-  console.log(data.entreprise);
+  //data.map((item) => console.log(item))
+  console.log(data)
 
   return (
     <div className="flex items-center justify-between w-full rounded-3xl h-20 p-4 bg-white">
-      <h1 className="text-sm lg:text-3xl font-semibold capitalize">hi {data.entreprise.nom}</h1>
+      <h1 className="text-sm lg:text-3xl font-semibold capitalize">hi {data && data.entreprise && data.entreprise.nom}</h1>
       <div className="flex items-center gap-1">
         <div className="hidden md:block">
           <Button variant="ghost" size="icon" className="rounded-full">

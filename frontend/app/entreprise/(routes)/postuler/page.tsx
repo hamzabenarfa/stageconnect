@@ -22,10 +22,11 @@ const Postuler = () => {
   }, [data]);
 
   return (
-    <div className="flex relative flex-col justify-center items-center gap-2">
-      <div className=" absolute bottom-10 right-10 -z-10 bg-orange-300 p-4">
+    <div className="flex flex-col justify-center items-center gap-2">
+      <div className="fixed bottom-10 right-10 z-10 p-4">
         <AddBtn />
       </div>
+     
       {data.map((item) => (
         <Card
           key={item.id}
@@ -36,6 +37,7 @@ const Postuler = () => {
           description={item.description}
         />
       ))}
+    
     </div>
    
   );
