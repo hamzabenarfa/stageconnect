@@ -1,15 +1,16 @@
-// ApiPage.tsx
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import { fetchApiData, createUser } from '@/services/UserApi';
-import { UserType } from '@/types/DataTypeUser';
+import { UserType } from "@/types/UserType";
+
 import './style.css';
 import EditForm from './EditForm';
 import { updateUser } from '@/services/UserApi';
 
 const ApiPage: React.FC = () => {
   const [data, setData] = useState<UserType[]>([]);
+  console.log("🚀 ~ file: FormComponent.tsx:13 ~ data:", data)
   const [editingUserId, setEditingUserId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -70,9 +71,8 @@ const ApiPage: React.FC = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>NOM</th>
-              <th>PRENOM</th>
               <th>E-MAIL</th>
+              <th>Role</th>
               <th>PASSWORD</th>
               <th>ACTIONS</th>
             </tr>
@@ -81,9 +81,8 @@ const ApiPage: React.FC = () => {
             {data.map(item => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{item.nom}</td>
-                <td>{item.prenom}</td>
                 <td>{item.email}</td>
+                <td>{item.role}</td>
                 <td>{item.password}</td>
                 <td>
                   <button onClick={() => handleDelete(item.id)}>DELETE</button>

@@ -25,7 +25,7 @@ const Navbar = () => {
   }, []);
 
   //data.map((item) => console.log(item))
-  console.log(data)
+
 
   return (
     <div className="flex items-center justify-between w-full rounded-3xl h-20 p-4 bg-white">
@@ -40,7 +40,7 @@ const Navbar = () => {
           </Button>
         </div>
 
-        <div className="flex flex-row items-center">
+        {/* <div className="flex flex-row items-center">
           <Image
             src="/google.png"
             alt="user img"
@@ -49,7 +49,7 @@ const Navbar = () => {
             className="rounded-full"
           />
           <ChevronDown className="w-10 h-10 text-black p-2 rounded-full" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 "use client";
 
-import { UserType } from "@/types/DataType";
+import { UserType } from "@/types/UserType";
 
 export const fetchApiData = async (): Promise<UserType[]> => {
   try {
@@ -62,3 +62,18 @@ export const updateUser = async (id: string, updatedData: Partial<UserType>): Pr
     throw error;
   }
 };
+
+export const deleteUser = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`http://localhost:8080/api/user/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Erreur lors de la suppression de l\'utilisateur');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'utilisateur', error);
+    throw error;
+  }
+}

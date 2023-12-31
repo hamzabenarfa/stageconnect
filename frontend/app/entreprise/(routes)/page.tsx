@@ -23,7 +23,7 @@ const Dashboard = () => {
           <RecentPositions />
         </div>
       </div>
-      <div className="h-full w-full rounded-3xl"></div>
+      <div className=" h-full w-full rounded-3xl"></div>
     </div>
   );
 };

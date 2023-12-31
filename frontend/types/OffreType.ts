@@ -1,9 +1,10 @@
-export interface DataItem {
+
+export interface OffreType  {
     id: string;
     title: string;
     place: string;
-    duration: number;
+    duration: number
     description: string;
     entrepriseId: string;
-    studentIds : string[];
-  };
+    studentIds: string[],
+};

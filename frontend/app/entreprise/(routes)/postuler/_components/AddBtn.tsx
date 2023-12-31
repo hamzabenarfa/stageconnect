@@ -47,12 +47,14 @@ const formSchema = z.object({
 });
 
 const AddBtn = () => {
+  const EntrepriseId = localStorage.getItem("entreprise");
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [place, setPlace] = useState("");
   const [duration, setDuration] = useState(0);
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [entrepriseId,SetentrepriseId] = useState(EntrepriseId)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,15 +70,13 @@ const AddBtn = () => {
 
     try {
       setLoading(true);
-
       const res = await axios.post("http://localhost:8080/api/offre", {
         title,
         place,
         duration,
         description,
-        entreprise: {
-          id: "6578003e79ca3766c33afbc4",
-        },
+        entrepriseId,
+        studentIds:[],
       });
 
       if (res) {

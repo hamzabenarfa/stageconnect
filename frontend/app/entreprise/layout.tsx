@@ -1,10 +1,17 @@
-
+"use client"
+import { redirect } from "next/navigation";
 import Navbar from "./_component/Navbar";
 import SideBar from "./_component/SideBar";
 
 
 
 const EntrepriseLayout = ({ children }: { children: React.ReactNode }) => {
+
+  const entrepriseId = localStorage.getItem("entreprise");
+  if (!entrepriseId) {
+    
+    redirect("/login");
+  }
 
   return (
     <div className="flex flex-col md:flex-row  p-4 min-h-screen backdrop-blur-3xl bg-gray-500/30  overflow-hidden">

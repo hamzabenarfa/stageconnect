@@ -5,15 +5,17 @@ import axios from "axios";
 import AddBtn from "./_components/AddBtn";
 import Card from "./_components/card";
 import { DataItem } from "@/types/entreprise";
+import { getOfferByEntreprise } from "@/services/Entreprise.service";
 
 const Postuler = () => {
   const [data, setData] = useState<DataItem[]>([]);
+  const entrepriseId = localStorage.getItem("entreprise") || "";
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/offre");
-        setData(res.data);
+        const res = await getOfferByEntreprise(entrepriseId);
+        setData(res);
       } catch (error) {
         console.log(error);
       }
@@ -21,6 +23,7 @@ const Postuler = () => {
     getData();
   }, [data]);
 
+  
   return (
     <div className="flex flex-col justify-center items-center gap-2">
       <div className="fixed bottom-10 right-10 z-10 p-4">
@@ -34,8 +37,9 @@ const Postuler = () => {
           title={item.title}
           place={item.place}
           duration={item.duration}
-          description={item.description}
-        />
+          description={item.description} 
+          entrepriseId={""} 
+          studentIds={[]}        />
       ))}
     
     </div>

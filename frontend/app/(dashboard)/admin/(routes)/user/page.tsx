@@ -1,51 +1,20 @@
-import React, { useState, useEffect } from 'react';
- import ApiPage from './_components/FormComponent';
+import React, { useState, useEffect } from "react";
+import ApiPage from "./_components/FormComponent";
 
 export default function User() {
-   return (
-     <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#f0f0f0' }}> 
-     <h1>GESTION USERS!</h1> 
-     <ApiPage /> 
-     </div> ); }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return (
+    <div
+      style={{
+        textAlign: "center",
+        padding: "20px",
+        backgroundColor: "#f0f0f0",
+      }}
+    >
+      <h1>GESTION USERS!</h1>
+      <ApiPage />
+    </div>
+  );
+}
 
 /*"use client";
 import React, { useState, useEffect } from "react";

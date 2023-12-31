@@ -1,5 +1,5 @@
 import axios from "axios";
-import { OffreType } from "../types/DataType";
+import { OffreType } from "../types/OffreType";
 
 const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 

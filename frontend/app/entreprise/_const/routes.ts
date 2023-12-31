@@ -14,13 +14,13 @@ export const routes = [
     {
         icon: Users,
         title:"Candidates",
-        lien:"/Candidates"
+        lien:"/entreprise/candidates"
     },
-    {
-        icon: Calendar,
-        title:"Calendar",
-        lien:"/Calendar"
-    }
+    // {
+    //     icon: Calendar,
+    //     title:"Calendar",
+    //     lien:"/Calendar"
+    // }
     
 
 

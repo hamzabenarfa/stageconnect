@@ -1,13 +1,8 @@
 import axios from "axios";
-import { EntrepriseType } from "../types/DataType";
 
 const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-/**
- * The above function is a JavaScript function that uses the axios library to make an HTTP GET request
- * to an API endpoint and returns the result.
- * @returns the result of the axios.get() method, which is a promise.
- */
+
 export function getListEntreprises(): any {
   try {
     const result = axios.get(api_url + "api/entreprise");

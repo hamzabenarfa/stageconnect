@@ -1,13 +1,12 @@
-// @jsxImportSource react
-// @ts-nocheck
+
 "use client"
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import { deleteOffreById, editOffreById, getListOffres } from "../../../../services/OffreApi";
-import { OffreType } from "@/types/DataType";
+import { deleteOffreById, editOffreById, getListOffres } from "@/services/OffreApi";
+import { OffreType } from "@/types/OffreType";
 import FormComponent from "./components/FormComponent";
 const Offres: React.FC = () => {
-  const [offres, setOffres] = useState<OffresType[]>([]);
+  const [offres, setOffres] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -56,7 +55,6 @@ const Offres: React.FC = () => {
           <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Company</th>
             <th>Place</th>
             <th>Duration</th>
             <th>Paid</th>
@@ -68,7 +66,6 @@ const Offres: React.FC = () => {
             <tr key={element.id}>
               <td>{element.id}</td>
               <td>{element.title}</td>
-              <td>{element.company}</td>
               <td>{element.place}</td>
               <td>{element.duration}</td>
               <td>{element.paid ? 'paid ' : 'not paid'}</td>
