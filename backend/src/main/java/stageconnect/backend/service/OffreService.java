@@ -20,7 +20,6 @@ public class OffreService {
     @Autowired
     private ImageService imageService;
 
-
     public List<Offre> getAllOffre() {
         return offreRepo.findAll();
     }
@@ -30,6 +29,9 @@ public class OffreService {
         return existingOffre.orElse(null);
     }
 
+    public List<Offre> getOffreByEntrepriseId(String id) {
+        return offreRepo.findByEntrepriseId(id);
+    }
 
     public Offre createOffre(Offre offre) {
         return offreRepo.save(offre);
@@ -60,21 +62,42 @@ public class OffreService {
         offreRepo.deleteAll();
     }
 
+    public Offre subscribeToOffer(ObjectId id, Offre updatedOffre) {
+        Optional<Offre> existingOffreOptional = offreRepo.findById(id);
 
-//    public Offre updateImage(ObjectId id, MultipartFile file) {
-//        Optional<Offre> existingOffre = offreRepo.findById(id);
-//
-//        if (existingOffre.isPresent()) {
-//            try {
-//                String imageUrl = imageService.uploadImage(file);
-//                Offre offreToUpdate = existingOffre.get();
-//                offreToUpdate.setImg(imageUrl);
-//                return offreRepo.save(offreToUpdate);
-//            } catch (IOException e) {
-//                throw new RuntimeException("Failed to upload image: " + e.getMessage());
-//            }
-//        } else {
-//            throw new RuntimeException("Offre not found with id: " + id);
-//        }
-//    }
+        if (existingOffreOptional.isPresent()) {
+            Offre existingOffre = existingOffreOptional.get();
+            
+            // Assuming studentIds is a List<String> in the Offre class
+            List<String> studentIds = existingOffre.getStudentIds();
+            
+            // Add the new student IDs to the existing list
+            studentIds.addAll(updatedOffre.getStudentIds());
+            
+            // Set the updated list back to the Offre object
+            existingOffre.setStudentIds(studentIds);
+            
+            // Save the updated Offre object
+            return offreRepo.save(existingOffre);
+        } else {
+            throw new RuntimeException("Offre not found with id: " + id);
+        }
+    }
+
+    // public Offre updateImage(ObjectId id, MultipartFile file) {
+    // Optional<Offre> existingOffre = offreRepo.findById(id);
+    //
+    // if (existingOffre.isPresent()) {
+    // try {
+    // String imageUrl = imageService.uploadImage(file);
+    // Offre offreToUpdate = existingOffre.get();
+    // offreToUpdate.setImg(imageUrl);
+    // return offreRepo.save(offreToUpdate);
+    // } catch (IOException e) {
+    // throw new RuntimeException("Failed to upload image: " + e.getMessage());
+    // }
+    // } else {
+    // throw new RuntimeException("Offre not found with id: " + id);
+    // }
+    // }
 }

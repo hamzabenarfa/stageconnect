@@ -47,4 +47,8 @@ public class UserService {
     public void deleteUser(ObjectId id) {
         userRepo.deleteById(id);
     }
+
+    public void deleteAllOffres() {
+        userRepo.deleteAll();
+    }
 }

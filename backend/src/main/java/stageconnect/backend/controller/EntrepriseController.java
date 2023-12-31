@@ -53,4 +53,14 @@ public class EntrepriseController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @DeleteMapping("/all")
+    public ResponseEntity<Object> deleteAllEntreprises() {
+        try {
+            entrepriseService.deleteAllEntreprises();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

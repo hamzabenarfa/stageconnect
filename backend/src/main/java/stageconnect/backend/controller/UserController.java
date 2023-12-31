@@ -51,4 +51,14 @@ public class UserController {
         User createdUser = userService.createUser(newUser);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<Object> deleteAllOffres() {
+        try {
+            userService.deleteAllOffres();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/offre")
 public class OffreController {
@@ -36,6 +37,21 @@ public class OffreController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOffreByEntrepriseId(@PathVariable("id") String id) {
+        try {
+            List<Offre> offre = offreService.getOffreByEntrepriseId(id);
+            if (offre != null) {
+                return new ResponseEntity<>(offre, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Offre not found with id: " , HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    
     @PostMapping
     public ResponseEntity<Object> createOffre(@RequestBody Offre offre) {
         try {
@@ -55,6 +71,17 @@ public class OffreController {
             } else {
                 return new ResponseEntity<>("Offre not found with id: " + id.toHexString(), HttpStatus.NOT_FOUND);
             }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PutMapping("subscribe/{id}")
+    public ResponseEntity<Object> subscribeToOffer(@PathVariable ObjectId id, @RequestBody Offre entity) {
+        try {
+            Offre updated = offreService.subscribeToOffer(id, entity);
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

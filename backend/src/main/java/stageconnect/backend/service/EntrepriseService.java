@@ -51,5 +51,7 @@ public class EntrepriseService {
     }
 
 
-
+    public void deleteAllEntreprises() {
+        entrepriseRepo.deleteAll();
+    }
 }
