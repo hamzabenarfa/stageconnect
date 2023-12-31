@@ -8,4 +8,7 @@ public interface UserRepo extends MongoRepository<User, ObjectId> {
     User findByEmailAndPassword(String email, String password);
 
     boolean existsByEmail(String email);
+
+    User findByEmail(String email);
+    
 }
