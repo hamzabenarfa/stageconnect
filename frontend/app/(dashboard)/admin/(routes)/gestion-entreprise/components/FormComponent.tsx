@@ -7,7 +7,7 @@ import { EntrepriseType } from "@/types/DataType";
 import React, { useEffect, useState } from "react";
 
 interface ModalProps {
-  entreprises: [];
+  entreprises: EntrepriseType[];
   setEntreprises: React.Dispatch<React.SetStateAction<EntrepriseType[]>>;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   idEntreprise: string;
@@ -42,7 +42,7 @@ const FormComponent: React.FC<ModalProps> = ({
 
         // Utiliser la méthode map pour créer un nouveau tableau avec l'objet mis à jour
         const updatedEntreprises: EntrepriseType[] = entreprises.map(
-          (entreprise) => (entreprise.id === idEntreprise ? newObj : entreprise)
+          (entreprise: EntrepriseType) => (entreprise.id === idEntreprise ? newObj : entreprise)
         );
         // Mettre à jour l'état avec le nouveau tableau
         setEntreprises(updatedEntreprises);

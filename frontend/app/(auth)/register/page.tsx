@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import authService from "@/services/Auth.service";
 import Toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowBigLeft, ChevronLeft } from "lucide-react";
+import { ArrowBigLeft } from "lucide-react";
 
 const Register = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const Register = () => {
 
   const [entrepriseData, setEntrepriseData] = useState(["", "", ""]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
     setEntrepriseData((prevData) => ({
       ...prevData,
@@ -26,7 +26,7 @@ const Register = () => {
     }));
   };
 
-  const handleChangeStudent = (e) => {
+  const handleChangeStudent = (e : { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
     setStudentData((prevData) => ({
       ...prevData,
@@ -34,7 +34,7 @@ const Register = () => {
     }));
   };
 
-  const handleRadioChange = (event) => {
+  const handleRadioChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setSelectedUserType(event.target.value);
   };
 
@@ -42,7 +42,7 @@ const Register = () => {
     setForm(true);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const role = selectedUserType === "student" ? "student" : "entreprise";
 
@@ -193,7 +193,6 @@ const Register = () => {
                     type="text"
                     id="nom"
                     name="nom"
-                    value={entrepriseData.nom}
                     onChange={handleChange}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />
@@ -205,7 +204,6 @@ const Register = () => {
                     type="text"
                     id="location"
                     name="location"
-                    value={entrepriseData.location}
                     onChange={handleChange}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />
@@ -217,7 +215,6 @@ const Register = () => {
                     type="text"
                     id="phone"
                     name="phone"
-                    value={entrepriseData.phone}
                     onChange={handleChange}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />
@@ -233,7 +230,6 @@ const Register = () => {
                     type="text"
                     id="nom"
                     name="nom"
-                    value={studentData.nom}
                     onChange={handleChangeStudent}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />
@@ -245,7 +241,6 @@ const Register = () => {
                     type="text"
                     id="location"
                     name="location"
-                    value={studentData.location}
                     onChange={handleChangeStudent}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />

@@ -55,7 +55,7 @@ const Card = ({ id, title, place, duration,description }: DataItem) => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <Modify id={id} title={title} place={place} duration={duration} description={description} />
+          <Modify id={id} title={title} place={place} duration={duration} description={description} entrepriseId={""} studentIds={[]} />
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <Button variant="destructive">Delete</Button>

@@ -1,17 +1,18 @@
-
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import { deleteOffreById, editOffreById, getListOffres } from "@/services/OffreApi";
-import { OffreType } from "@/types/OffreType";
+import {
+  deleteOffreById,
+  editOffreById,
+  getListOffres,
+} from "@/services/OffreApi";
+import { OffreType } from "@/types/DataType";
 import FormComponent from "./components/FormComponent";
 const Offres: React.FC = () => {
-  const [offres, setOffres] = useState([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [offres, setOffres] = useState<OffreType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [idOffre, setIdOffre] = useState<string>("");
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getListOffres();
@@ -21,15 +22,14 @@ const Offres: React.FC = () => {
   }, [offres]);
 
   const handleEdit = (id: string) => {
-    console.log(`Modifier l'offre avec l'ID ${id}`);
-    editOffreById(id)
+    editOffreById(id);
     setIdOffre(id);
     setIsModalOpen(true);
   };
 
   const handleDelete = async (id: string) => {
     try {
-     const res = await deleteOffreById(id);
+      const res = await deleteOffreById(id);
       console.log(res);
       // const newList = offres.filter((el) => el.id !== id);
       // setOffres(newList);
@@ -42,7 +42,7 @@ const Offres: React.FC = () => {
 
   const handleCreate = () => {
     setIsModalOpen(true);
-    setIdOffre(null);
+    setIdOffre("");
     console.log("Créer une nouvelle offre");
   };
   return (
@@ -63,15 +63,19 @@ const Offres: React.FC = () => {
         </thead>
         <tbody>
           {offres.map((element) => (
-            <tr key={element.id}>
+            <tr key={String(element.id)}>
               <td>{element.id}</td>
               <td>{element.title}</td>
               <td>{element.place}</td>
               <td>{element.duration}</td>
-              <td>{element.paid ? 'paid ' : 'not paid'}</td>
+              <td>{element.paid ? "paid " : "not paid"}</td>
               <td>
-                <button onClick={() => handleEdit(element.id)}>Modifier</button>
-                <button onClick={() => handleDelete(element.id)}>Supprimer</button>
+                <button onClick={() => handleEdit(String(element.id))}>
+                  Modifier
+                </button>
+                <button onClick={() => handleDelete(String(element.id))}>
+                  Supprimer
+                </button>
               </td>
             </tr>
           ))}
@@ -86,6 +90,7 @@ const Offres: React.FC = () => {
               setOffres={setOffres}
               setIsModalOpen={setIsModalOpen}
               setIdOffre={setIdOffre}
+              idOffre={""}
             />
           </div>
         </div>

@@ -6,4 +6,6 @@ export interface DataItem {
     description: string;
     entrepriseId: string;
     studentIds : string[];
+    status? : boolean;
+    nom? : string;
   };

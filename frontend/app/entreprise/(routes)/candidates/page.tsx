@@ -17,13 +17,13 @@ const Candidates = () => {
         setData(res);
 
         const studentIds = res
-          .flatMap((item) => item.studentIds)
+          .flatMap((item: { studentIds: string; }) => item.studentIds)
           .filter(Boolean);
         const validStudentIds = studentIds.filter(Boolean);
 
         if (validStudentIds.length > 0) {
           const usersData = await Promise.all(
-            validStudentIds.map(async (id) => {
+            validStudentIds.map(async (id: string) => {
               try {
                 const response = await axios.get(
                   `http://localhost:8080/api/user/${id}`
@@ -40,7 +40,7 @@ const Candidates = () => {
           const uniqueUsers = usersData.reduce((acc, user) => {
             if (
               user &&
-              !acc.some((existingUser) => existingUser.id === user.id)
+              !acc.some((existingUser: { id: any; }) => existingUser.id === user.id)
             ) {
               acc.push(user);
             }

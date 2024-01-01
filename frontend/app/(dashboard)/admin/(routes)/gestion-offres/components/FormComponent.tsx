@@ -16,6 +16,7 @@ interface ModalProps {
 }
 
 const FormComponent: React.FC<ModalProps> = ({
+  
   offres,
   setOffres,
   setIsModalOpen,

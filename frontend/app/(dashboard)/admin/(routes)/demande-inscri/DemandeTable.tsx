@@ -1,10 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import { InscriEntType } from '@/types/DataType';
+import { useState, useEffect } from 'react';
 import { fetchApiData } from '@/services/FetchDataApi';
+import { DataItem } from '@/types/entreprise';
 
 const ApiPage: React.FC = () => {
-  const [data, setData] = useState<InscriEntType[]>([]);
+  const [data, setData] = useState<DataItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,10 +48,8 @@ const ApiPage: React.FC = () => {
     <table className="min-w-full">
       <thead className="bg-gray-50">
         <tr>
-          <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Nom</th>
-          <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Numéro de téléphone</th>
-          <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Email</th>
-          <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Mot de passe</th>
+          <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Name</th>
+          <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Place</th>
           <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Action</th>
         </tr>
       </thead>
@@ -59,9 +57,7 @@ const ApiPage: React.FC = () => {
         {data.map(item => (
           <tr key={item.id}>
             <td className="text-left px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{item.nom}</div></td>
-            <td className="text-left px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{item.email}</div></td>
-            <td className="text-left px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{item.adresse}</div></td>
-            <td className="text-left px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{item.password}</div></td>
+            <td className="text-left px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{item.place}</div></td>
             <td>
                   <button onClick={() => handleAccept(item.id)} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Accepter</button>
                   <button onClick={() => handleRefuse(item.id)} className='bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>Refuser</button>

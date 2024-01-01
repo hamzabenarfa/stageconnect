@@ -39,12 +39,12 @@ export function addOffre(
 
 export function editOffreById(
   id: String,
-  title: String,
-  company: String,
-  place:String,
-  duration:String,
-  paid: Boolean,
-  img:String,
+  title?: String,
+  company?: String,
+  place?:String,
+  duration?:String,
+  paid?: Boolean,
+  img?:String,
 ): any {
   const obj = {
     

@@ -6,12 +6,12 @@ import "./style.css";
 //   deleteEntrepriseById,
 //   getListEntreprises,
 // } from "../../../../services/EntrepriseApi";
-// import { EntrepriseType } from "@/types/DataType";
+ import { EntrepriseType } from "@/types/DataType";
 import FormComponent from "./components/FormComponent";
 import { deleteEntrepriseById, getListEntreprises } from "@/services/EntrepriseApi";
 
 const Entreprises: React.FC = () => {
-  const [entreprises, setEntreprises] = useState([]);
+  const [entreprises, setEntreprises] = useState<EntrepriseType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [idEntreprise, setIdEntreprise] = useState<string>("");
 

@@ -34,8 +34,7 @@ const Postuler = () => {
           title={item.title}
           place={item.place}
           duration={item.duration}
-          description={item.description}
-        />
+          description={item.description} entrepriseId={""} studentIds={[]}        />
       ))}
     </div>
    
