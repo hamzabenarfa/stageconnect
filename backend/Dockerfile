@@ -1,29 +1,8 @@
-# Use the official Maven image as a base image
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM maven:3.8.5-openjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the Maven project file
-COPY pom.xml .
-
-# Copy the source code
-COPY src src
-
-# Build the application
-RUN mvn clean package
-
-# Use the official OpenJDK image as a base image for runtime
-FROM adoptopenjdk:17-jdk-hotspot-bionic AS runtime
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the JAR file from the build image
-COPY --from=build /app/target/*.jar app.jar
-
-# Expose the port the app runs on
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/demo-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
-
-# Define the command to run the Spring Boot application
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","demo.jar"]
