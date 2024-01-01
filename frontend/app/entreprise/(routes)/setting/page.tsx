@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { getEnterpriseFromUser } from "@/services/Entreprise.service";
+import  Toast  from "react-hot-toast";
 
 const Setting = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ const Setting = () => {
       }
     };
     fetchData();
-  }, [entrepriseId]);
+  }, [api_url, entrepriseId]);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -53,7 +54,11 @@ const Setting = () => {
         api_url + "api/entreprise/" + Id,
         formData
       );
-      console.log(response.data);
+      if(response.data){
+          Toast.success("Settings updated successfully")
+          window.location.reload()
+      }
+      
     } catch (error) {
       console.error("Error updating settings:", error);
     }
