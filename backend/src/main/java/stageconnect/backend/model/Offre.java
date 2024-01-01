@@ -27,6 +27,7 @@ public class Offre {
     private Integer duration;
     private String description;
     private String entrepriseId;
+    private String img;
 
     private List<String> studentIds ;
 

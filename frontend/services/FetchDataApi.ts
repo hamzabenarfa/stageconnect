@@ -1,15 +1,15 @@
-"use client"
-import { InscriEntType } from "@/types/DataType";
 
-export const fetchApiData = async (): Promise<InscriEntType[]> => {
+const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export const fetchApiData = async (): Promise<[]> => {
   try {
-    const response = await fetch('http://localhost:8080/api/entreprise');
+    const response = await fetch(api_url+'api/entreprise');
     
     if (!response.ok) {
       throw new Error('Erreur lors de la récupération des données');
     }
 
-    const data: InscriEntType[] = await response.json();
+    const data = await response.json();
     return data;
   } catch (error) {
     console.error('Erreur lors de la récupération des données', error);

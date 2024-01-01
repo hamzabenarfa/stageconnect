@@ -84,20 +84,20 @@ public class OffreService {
         }
     }
 
-    // public Offre updateImage(ObjectId id, MultipartFile file) {
-    // Optional<Offre> existingOffre = offreRepo.findById(id);
-    //
-    // if (existingOffre.isPresent()) {
-    // try {
-    // String imageUrl = imageService.uploadImage(file);
-    // Offre offreToUpdate = existingOffre.get();
-    // offreToUpdate.setImg(imageUrl);
-    // return offreRepo.save(offreToUpdate);
-    // } catch (IOException e) {
-    // throw new RuntimeException("Failed to upload image: " + e.getMessage());
-    // }
-    // } else {
-    // throw new RuntimeException("Offre not found with id: " + id);
-    // }
-    // }
+    public Offre updateImage(ObjectId id, MultipartFile file) {
+    Optional<Offre> existingOffre = offreRepo.findById(id);
+    
+    if (existingOffre.isPresent()) {
+    try {
+    String imageUrl = imageService.uploadImage(file);
+    Offre offreToUpdate = existingOffre.get();
+    offreToUpdate.setImg(imageUrl);
+    return offreRepo.save(offreToUpdate);
+    } catch (IOException e) {
+    throw new RuntimeException("Failed to upload image: " + e.getMessage());
+    }
+    } else {
+    throw new RuntimeException("Offre not found with id: " + id);
+    }
+    }
 }

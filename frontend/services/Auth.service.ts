@@ -9,12 +9,15 @@ interface UserData {
   entreprise?: string[];
 }
 
+const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+
 class AuthService {
   private http: AxiosInstance;
 
   constructor() {
     this.http = axios.create({
-      baseURL: 'http://localhost:8080/api/auth',
+      baseURL: api_url+'api/auth',
       headers: {
         'Content-type': 'application/json',
       },

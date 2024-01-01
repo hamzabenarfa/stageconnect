@@ -1,7 +1,9 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
+
+const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: api_url+"api",
   headers: {
     "Content-type": "application/json",
   },

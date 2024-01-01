@@ -1,12 +1,11 @@
-// UserApi.ts
-
-"use client";
 
 import { UserType } from "@/types/UserType";
 
+const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export const fetchApiData = async (): Promise<UserType[]> => {
   try {
-    const response = await fetch('http://localhost:8080/api/user');
+    const response = await fetch(api_url+'api/user');
     
     if (!response.ok) {
       throw new Error('Erreur lors de la récupération des données');
@@ -22,7 +21,7 @@ export const fetchApiData = async (): Promise<UserType[]> => {
 
 export const createUser = async (userData: Partial<UserType>): Promise<UserType> => {
   try {
-    const response = await fetch('http://localhost:8080/api/user', {
+    const response = await fetch(api_url+'api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +42,7 @@ export const createUser = async (userData: Partial<UserType>): Promise<UserType>
 };
 export const updateUser = async (id: string, updatedData: Partial<UserType>): Promise<UserType> => {
   try {
-    const response = await fetch(`http://localhost:8080/api/user/${id}`, {
+    const response = await fetch(`${api_url}api/user/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +64,7 @@ export const updateUser = async (id: string, updatedData: Partial<UserType>): Pr
 
 export const deleteUser = async (id: string): Promise<void> => {
   try {
-    const response = await fetch(`http://localhost:8080/api/user/${id}`, {
+    const response = await fetch(`${api_url}api/user/${id}`, {
       method: 'DELETE',
     });
 
