@@ -38,7 +38,10 @@ public class EntrepriseService {
         if (existingEntreprise.isPresent()) {
             Entreprise entrepriseToUpdate = existingEntreprise.get();
             entrepriseToUpdate.setNom(updatedEntreprise.getNom());
-            entrepriseToUpdate.setAdresse(updatedEntreprise.getAdresse());
+            entrepriseToUpdate.setLocation(updatedEntreprise.getLocation());
+            entrepriseToUpdate.setPhone(updatedEntreprise.getPhone());
+
+            
             return entrepriseRepo.save(entrepriseToUpdate);
         } else {
             // Handle case where the Offre with the given ID is not found
