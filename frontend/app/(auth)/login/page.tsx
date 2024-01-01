@@ -18,10 +18,10 @@ const Login = () => {
 
       if (userData) {
         if (userData.role === "student") {
-          localStorage.setItem("student", userData.id);
+          localStorage.setItem("student", userData.id ?? "");
           router.push("/student");
         } else if (userData.role === "entreprise") {
-          localStorage.setItem("entreprise", userData.id);
+          localStorage.setItem("entreprise", userData.id ?? "");
           router.push("/entreprise");
         }
 
@@ -89,7 +89,9 @@ const Login = () => {
           </Button>
         </div>
 
-        <Link href="/register" className=" underline">You dont have acount ?</Link>
+        <Link href="/register" className=" underline">
+          You dont have acount ?
+        </Link>
       </div>
     </section>
   );
