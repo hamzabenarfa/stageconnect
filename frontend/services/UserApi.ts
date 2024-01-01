@@ -1,7 +1,21 @@
 
 import { UserType } from "@/types/UserType";
+import axios from "axios";
 
 const api_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+
+export const getUserById = async (id: string): Promise<UserType> => {
+  try {
+    const response = await axios.get(`${api_url}api/user/${id}`);
+  
+   
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données', error);
+    throw error;
+  }
+}
 
 export const fetchApiData = async (): Promise<UserType[]> => {
   try {

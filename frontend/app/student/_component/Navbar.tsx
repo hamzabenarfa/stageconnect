@@ -1,6 +1,7 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/app/(dashboard)/_components/logo";
-import { Menu, User2 } from "lucide-react";
+import { User2 } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -11,7 +12,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Setting from "./Setting";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
 const Navbar = () => {
+  const router = useRouter();
+  const { removeItem } = useLocalStorage("student");
+
+  const handleLogout = () => {
+    removeItem();
+    router.push("/login");
+  };
+
   return (
     <div className="flex items-center justify-around p-4 flex-row relative z-10  bg-white/30  backdrop-blur-md ">
       <div className="flex flex-row gap-8">
@@ -37,7 +48,12 @@ const Navbar = () => {
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem
+              className=" cursor-pointer"
+              onClick={handleLogout}
+            >
+              Logout
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         <Setting />

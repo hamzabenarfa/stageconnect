@@ -1,12 +1,24 @@
+"use client"
+import { useEffect } from "react";
 import Landing from "./_component/Landing";
 import Navbar from "./_component/Navbar";
 import Sidebar from "./_component/sidebar";
+import { redirect } from "next/navigation";
 
 export default function StudentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const studentId = localStorage.getItem("student");
+      if (!studentId) { 
+        redirect("/login");
+      }
+    }
+  }, []);
   return (
     <main className="">
       <Navbar />

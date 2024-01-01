@@ -16,6 +16,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [form, setForm] = useState(false);
   const [studentData, setStudentData] = useState(["", ""]);
+  console.log("🚀 ~ file: page.tsx:19 ~ Register ~ studentData:", studentData)
 
   const [entrepriseData, setEntrepriseData] = useState(["", "", ""]);
 
@@ -230,7 +231,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="nom"
-                    name="nom"
+                    name="firstName"
                     onChange={handleChangeStudent}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />
@@ -241,7 +242,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="location"
-                    name="location"
+                    name="lastName"
                     onChange={handleChangeStudent}
                     className="border-gray-300 border-2 p-2 rounded-md"
                   />
