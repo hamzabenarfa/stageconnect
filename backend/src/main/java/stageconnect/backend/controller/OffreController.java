@@ -6,13 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.multipart.MultipartFile;
 import stageconnect.backend.model.Offre;
-import stageconnect.backend.service.ImageService;
 import stageconnect.backend.service.OffreService;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -25,9 +21,7 @@ public class OffreController {
     @Autowired
     private OffreService offreService;
 
-    @Autowired
-    private ImageService imageService;
-    private String image;
+    
 
     @GetMapping
     public ResponseEntity<List<Offre>> getAllOffres() {
@@ -108,15 +102,6 @@ public class OffreController {
         }
     }
 
-   @PostMapping("/uploadImage/{id}")
-   public ResponseEntity<Object> uploadImage(@PathVariable("id") ObjectId id, @RequestParam("file") MultipartFile file) {
-       try {
-           Offre updatedOffre = offreService.updateImage(id, file);
-           return new ResponseEntity<>(updatedOffre, HttpStatus.OK);
-       } catch (Exception e) {
-           return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-       }
-   }
 
 
 

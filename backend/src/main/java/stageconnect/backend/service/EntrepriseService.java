@@ -39,13 +39,11 @@ public class EntrepriseService {
             Entreprise entrepriseToUpdate = existingEntreprise.get();
             entrepriseToUpdate.setNom(updatedEntreprise.getNom());
             entrepriseToUpdate.setLocation(updatedEntreprise.getLocation());
-            entrepriseToUpdate.setPhone(updatedEntreprise.getPhone());
-
+            entrepriseToUpdate.setPhone(updatedEntreprise.getPhone());     
             
             return entrepriseRepo.save(entrepriseToUpdate);
         } else {
-            // Handle case where the Offre with the given ID is not found
-            throw new RuntimeException("Offre not found with id: " + id.toHexString());
+            throw new RuntimeException("entreprise not found with id: " + id.toHexString());
         }
     }
 

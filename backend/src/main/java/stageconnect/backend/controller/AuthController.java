@@ -1,7 +1,5 @@
 package stageconnect.backend.controller;
 
-import org.springframework.http.HttpStatusCode;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,21 +19,21 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class AuthController {
 
-    private final AuthService authService;
-    private final EntrepriseRepo entrepriseRepository;
-    private final StudentRepo studentRepository;
+    @Autowired
+    private  AuthService authService;
+
+    @Autowired
+    private  EntrepriseRepo entrepriseRepository;
+
+    @Autowired
+    private  StudentRepo studentRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public AuthController(AuthService authService, EntrepriseRepo entrepriseRepository, StudentRepo studentRepository) {
-        this.authService = authService;
-        this.entrepriseRepository = entrepriseRepository;
-        this.studentRepository = studentRepository;
+ 
 
-    }
-
-     @PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginRequest) {
         try {
             String email = loginRequest.get("email");
