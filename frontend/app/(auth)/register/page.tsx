@@ -11,6 +11,7 @@ import { ArrowBigLeft } from "lucide-react";
 const Register = () => {
   const router = useRouter();
   const [selectedUserType, setSelectedUserType] = useState("");
+  console.log("🚀 ~ file: page.tsx:14 ~ Register ~ selectedUserType:", selectedUserType)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [form, setForm] = useState(false);

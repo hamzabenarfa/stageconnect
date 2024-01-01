@@ -1,9 +1,9 @@
 
-
-
 const StudentProfile = () => {
   return (
-    <div>this is home page</div>
+    <div className="flex">
+      home page
+    </div>
   );
 };
 

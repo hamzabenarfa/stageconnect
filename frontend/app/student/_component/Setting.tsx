@@ -16,8 +16,6 @@ const Setting = () => {
   return (
     <Sheet>
       <SheetTrigger><Settings size={32} className="" /></SheetTrigger>
-     
-      
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
