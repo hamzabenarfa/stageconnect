@@ -20,3 +20,15 @@ export async function getOfferByEntreprise(id:string) {
   }
 }
 
+export async function getEnterpriseFromUser(id: string) {
+  try {
+    const response = await instance.get("/user/"+id);
+    const data = response.data;
+    const enterpriseId = data?.entreprise?.id;
+    return enterpriseId;
+  } catch (error) {
+    console.error("Failed to get enterprise from user:", error);
+    throw error;
+  }
+}
+
