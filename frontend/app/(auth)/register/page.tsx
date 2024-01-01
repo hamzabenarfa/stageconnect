@@ -5,6 +5,8 @@ import Image from "next/image";
 import authService from "@/services/Auth.service";
 import Toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { ArrowBigLeft, ChevronLeft } from "lucide-react";
 
 const Register = () => {
   const router = useRouter();
@@ -12,9 +14,9 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [form, setForm] = useState(false);
-  const [studentData, setStudentData] = useState(['','']);
+  const [studentData, setStudentData] = useState(["", ""]);
 
-  const [entrepriseData, setEntrepriseData] = useState(['','','']);
+  const [entrepriseData, setEntrepriseData] = useState(["", "", ""]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,9 +45,14 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const role = selectedUserType === "student" ? "student" : "entreprise";
-    
+
     if (role === "student") {
-      const res = await authService.register(email, password, role, studentData);
+      const res = await authService.register(
+        email,
+        password,
+        role,
+        studentData
+      );
       console.log("Response:", res);
       if (res) {
         router.push("/login");
@@ -53,19 +60,26 @@ const Register = () => {
       } else {
         Toast.error("Wrong Credentials");
       }
-    }else if (role === "entreprise") {
-    try {
-      const res = await authService.register(email, password, role, undefined,entrepriseData);
-      console.log("Response:", res);
-      if (res) {
-        router.push("/login");
-        Toast.success("Login successful");
-      } else {
-        Toast.error("Wrong Credentials");
+    } else if (role === "entreprise") {
+      try {
+        const res = await authService.register(
+          email,
+          password,
+          role,
+          undefined,
+          entrepriseData
+        );
+        console.log("Response:", res);
+        if (res) {
+          router.push("/login");
+          Toast.success("Login successful");
+        } else {
+          Toast.error("Wrong Credentials");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }}
+    }
   };
 
   return (
@@ -78,7 +92,7 @@ const Register = () => {
         className="hidden md:block"
       />
       {!form && (
-        <div className="shadow-md md:max-w-sm w-full mx-2 p-2 rounded-2xl h-[90vh] space-y-10 bg-white flex flex-col items-center justify-center ">
+        <div className="shadow-md md:max-w-sm w-full mx-2 px-4 p-2 rounded-2xl h-[90vh] space-y-10 bg-white flex flex-col items-center justify-center ">
           <h1 className="text-2xl text-center font-bold">
             Join as a student or an enterprise
           </h1>
@@ -132,13 +146,16 @@ const Register = () => {
             </div>
           </div>
 
-          <Button onClick={openForm} className="w-full" variant="success">
+          <Button onClick={openForm} disabled={selectedUserType===""} className="w-full" variant="success">
             Join as a {selectedUserType}
           </Button>
+          <Link href="/login" className=" underline">
+            You have acount ?
+          </Link>
         </div>
       )}
       {form && (
-        <form className="shadow-md md:max-w-sm w-full mx-2 px-4 rounded-2xl h-[90vh] space-y-10 bg-white flex flex-col items-center justify-center">
+        <form className="shadow-md md:max-w-sm w-full mx-2 px-4 p-2 rounded-2xl h-full space-y-6 py-6 bg-white flex flex-col items-center justify-center">
           <h1 className="text-2xl md:text-3xl text-center font-bold">
             {selectedUserType === "student" ? "Student" : "Entreprise"}{" "}
             Registration
@@ -168,7 +185,7 @@ const Register = () => {
               required
             />
 
-            {selectedUserType === "entreprise" && (
+            {selectedUserType === "entreprise"  && (
               <>
                 <div className="flex flex-col space-y-2 w-full">
                   <label htmlFor="nom">Nom:</label>
@@ -245,6 +262,18 @@ const Register = () => {
           >
             Register
           </Button>
+          { selectedUserType !== "" && (
+            <Button
+              onClick={() => {setSelectedUserType("")
+                   setForm(false)}}
+              type="submit"
+              className="w-full"
+              size="lg"
+              variant="warning"
+            >
+              <ArrowBigLeft /> back
+            </Button>
+          )}
         </form>
       )}
     </section>
