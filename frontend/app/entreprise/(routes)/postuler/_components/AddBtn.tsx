@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { PlusCircle } from "lucide-react";
@@ -47,15 +47,23 @@ const formSchema = z.object({
 });
 
 const AddBtn = () => {
-  const EntrepriseId = localStorage.getItem("entreprise");
+
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [place, setPlace] = useState("");
   const [duration, setDuration] = useState(0);
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const [entrepriseId,SetentrepriseId] = useState(EntrepriseId)
-
+  const [entrepriseId,SetentrepriseId] = useState("")
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      
+      const Entrepriseid = localStorage.getItem("entreprise");
+      if(Entrepriseid){
+        SetentrepriseId(Entrepriseid)
+      }
+    }
+  }, []);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
