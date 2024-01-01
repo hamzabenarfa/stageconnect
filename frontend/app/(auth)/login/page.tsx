@@ -36,7 +36,8 @@ const Login = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-between pr-10 overflow-hidden bg-gray-100 space-y-8 ">
+    <section className="min-h-screen flex items-center justify-around overflow-hidden bg-gray-100 space-y-8 ">
+
       <Image
         src="/login.png"
         alt="Picture of the author"
@@ -45,7 +46,7 @@ const Login = () => {
         className="hidden md:block"
       />
 
-      <div className="max-w-lg w-full px-10 shadow-md rounded-2xl h-[90vh] bg-white flex flex-col items-center justify-around ">
+      <div className="md:max-w-lg mx-2 w-full px-10 shadow-md rounded-2xl h-[90vh] bg-white flex flex-col items-center justify-around ">
         <div className="flex flex-col items-center">
           <p className="font-bold text-5xl text-blue-400">
             <Link href="/">Stage Connect</Link>

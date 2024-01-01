@@ -34,11 +34,11 @@ const Landing = () => {
               future.
             </p>
           </div>
-          <Input
+          {/* <Input
             type="search"
             className="border-2 border-blue-200 rounded-2xl h-12 mt-6"
             placeholder="Type here to search by internship title ,keyword ect..."
-          />
+          /> */}
         </div>
 
         <Image src="/hero.avif" width={500} height={500} alt="Logo" />

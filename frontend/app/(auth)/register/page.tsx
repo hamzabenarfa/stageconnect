@@ -1,28 +1,71 @@
 "use client";
-
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import authService from "../../../services/Auth.service"; 
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/app/(dashboard)/_components/logo";
 import Image from "next/image";
+import authService from "@/services/Auth.service";
+import Toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const router = useRouter();
-  const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
+  const [selectedUserType, setSelectedUserType] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [form, setForm] = useState(false);
+  const [studentData, setStudentData] = useState(['','']);
 
-  const onSubmit = async () => {
+  const [entrepriseData, setEntrepriseData] = useState(['','','']);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEntrepriseData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleChangeStudent = (e) => {
+    const { name, value } = e.target;
+    setStudentData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleRadioChange = (event) => {
+    setSelectedUserType(event.target.value);
+  };
+
+  const openForm = () => {
+    setForm(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const role = selectedUserType === "student" ? "student" : "entreprise";
+    
+    if (role === "student") {
+      const res = await authService.register(email, password, role, studentData);
+      console.log("Response:", res);
+      if (res) {
+        router.push("/login");
+        Toast.success("Login successful");
+      } else {
+        Toast.error("Wrong Credentials");
+      }
+    }else if (role === "entreprise") {
     try {
-      const userData = await authService.register(nom, prenom, email, password);
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-     
-    }
+      const res = await authService.register(email, password, role, undefined,entrepriseData);
+      console.log("Response:", res);
+      if (res) {
+        router.push("/login");
+        Toast.success("Login successful");
+      } else {
+        Toast.error("Wrong Credentials");
+      }
+    } catch (err) {
+      console.log(err);
+    }}
   };
 
   return (
@@ -34,65 +77,176 @@ const Register = () => {
         height={600}
         className="hidden md:block"
       />
-      <div className=" px-10 shadow-md rounded-2xl h-[90vh]  bg-white flex flex-col items-center justify-around ">
-        <div className="flex flex-col items-center space-y-4">
-          <Logo />
-          <div className="flex flex-col items-center justify-center ">
-            {/* <h1 className="text-2xl md:text-5xl font-semibold">
-              Welcome back!
-            </h1> */}
-            <p className="text-xs md:text-sm text-gray-400">
-              Please enter your details
-            </p>
-          </div>
-        </div>
-        <form className="w-full">
-          <div className="flex flex-col items-center justify-center mt-4">
-            <input
-              className="w-full p-2 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500"
-              style={{marginBottom:'15px'}}
-              type="text"
-              placeholder="Nom"
-              value={nom}
-              onChange={(e) => setNom(e.target.value)}
-            />
-            <input
-              className="w-full p-2 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500"
-              type="text"
-              style={{marginBottom:'15px'}}
-              placeholder="Prenom"
-              value={prenom}
-              onChange={(e) => setPrenom(e.target.value)}
-            />
-            <input
-              className="w-full p-2 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500"
-              type="text"
-              style={{marginBottom:'15px'}}
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              className="w-full p-2 border-2 border-gray-200 rounded-md focus:outline-none focus:border-blue-500 mt-2"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </form>
-        <Button type="button" onClick={onSubmit} className="w-full">
-          Sign Up
-        </Button>
-        {error && (
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-4 rounded-md">
-              <p>{error}</p>
-              <button onClick={() => setError("")}>Close</button>
+      {!form && (
+        <div className="shadow-md md:max-w-sm w-full mx-2 p-2 rounded-2xl h-[90vh] space-y-10 bg-white flex flex-col items-center justify-center ">
+          <h1 className="text-2xl text-center font-bold">
+            Join as a student or an enterprise
+          </h1>
+          <div className="flex flex-col space-y-4">
+            <div
+              onClick={() => setSelectedUserType("student")}
+              className={`flex-1 h-full rounded-xl space-y-4 p-4 cursor-pointer ${
+                selectedUserType === "student"
+                  ? "bg-emerald-200 border-green-500 border-4"
+                  : "border-gray-200 border-2"
+              }`}
+            >
+              <div className="flex flex-row justify-between text-3xl">
+                🧑‍🎓
+                <input
+                  type="radio"
+                  className="form-radio h-5 w-5 text-green-500"
+                  name="name"
+                  value="student"
+                  checked={selectedUserType === "student"}
+                  onChange={handleRadioChange}
+                />
+              </div>
+              <h1 className="text-xl font-bold">
+                I&apos;m a student looking for an internship
+              </h1>
+            </div>
+
+            <div
+              onClick={() => setSelectedUserType("entreprise")}
+              className={`flex-1 h-full md:pb-6 rounded-xl space-y-4 p-4 cursor-pointer ${
+                selectedUserType === "entreprise"
+                  ? "bg-emerald-200 border-green-500 border-4"
+                  : "border-gray-200 border-2"
+              }`}
+            >
+              <div className="flex flex-row justify-between text-3xl">
+                💼
+                <input
+                  type="radio"
+                  className="form-radio h-5 w-5 text-green-500"
+                  name="name"
+                  value="entreprise"
+                  checked={selectedUserType === "entreprise"}
+                  onChange={handleRadioChange}
+                />
+              </div>
+              <h1 className="text-xl font-bold">
+                I&apos;m a company looking for interns
+              </h1>
             </div>
           </div>
-        )}
-      </div>
+
+          <Button onClick={openForm} className="w-full" variant="success">
+            Join as a {selectedUserType}
+          </Button>
+        </div>
+      )}
+      {form && (
+        <form className="shadow-md md:max-w-sm w-full mx-2 px-4 rounded-2xl h-[90vh] space-y-10 bg-white flex flex-col items-center justify-center">
+          <h1 className="text-2xl md:text-3xl text-center font-bold">
+            {selectedUserType === "student" ? "Student" : "Entreprise"}{" "}
+            Registration
+          </h1>
+
+          <div className="flex flex-col space-y-2 w-full">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-gray-300 border-2 p-2 rounded-md"
+              required
+            />
+          </div>
+          <div className="flex flex-col space-y-2 w-full">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border-gray-300 border-2 p-2 rounded-md"
+              required
+            />
+
+            {selectedUserType === "entreprise" && (
+              <>
+                <div className="flex flex-col space-y-2 w-full">
+                  <label htmlFor="nom">Nom:</label>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    value={entrepriseData.nom}
+                    onChange={handleChange}
+                    className="border-gray-300 border-2 p-2 rounded-md"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-full">
+                  <label htmlFor="location">Location:</label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    value={entrepriseData.location}
+                    onChange={handleChange}
+                    className="border-gray-300 border-2 p-2 rounded-md"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-full">
+                  <label htmlFor="phone">Phone:</label>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={entrepriseData.phone}
+                    onChange={handleChange}
+                    className="border-gray-300 border-2 p-2 rounded-md"
+                  />
+                </div>
+              </>
+            )}
+
+            {selectedUserType === "student" && (
+              <>
+                <div className="flex flex-col space-y-2 w-full">
+                  <label htmlFor="nom">Nom:</label>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    value={studentData.nom}
+                    onChange={handleChangeStudent}
+                    className="border-gray-300 border-2 p-2 rounded-md"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-full">
+                  <label htmlFor="location">Last name:</label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    value={studentData.location}
+                    onChange={handleChangeStudent}
+                    className="border-gray-300 border-2 p-2 rounded-md"
+                  />
+                </div>
+              </>
+            )}
+          </div>
+          <Button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-full"
+            size="lg"
+            variant="success"
+          >
+            Register
+          </Button>
+        </form>
+      )}
     </section>
   );
 };

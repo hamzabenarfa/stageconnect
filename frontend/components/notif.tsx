@@ -14,10 +14,9 @@ const Notif = () => {
   return (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>
-          <Button variant="ghost">
+        <MenubarTrigger className=" cursor-pointer">
             <Bell />
-          </Button>
+       
         </MenubarTrigger>
         <MenubarContent>
           <MenubarItem>Nouveau message reçu</MenubarItem>
