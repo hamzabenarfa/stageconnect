@@ -9,7 +9,15 @@ import { getOfferByEntreprise } from "@/services/Entreprise.service";
 
 const Postuler = () => {
   const [data, setData] = useState<DataItem[]>([]);
-  const entrepriseId = localStorage.getItem("entreprise") || "";
+  const [entrepriseId, SetentrepriseId] = useState("");
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const entrepriseid = localStorage.getItem("entreprise");
+      if (entrepriseid) { 
+        SetentrepriseId(entrepriseid)
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
