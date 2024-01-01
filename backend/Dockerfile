@@ -14,7 +14,7 @@ COPY src src
 RUN mvn clean package
 
 # Use the official OpenJDK image as a base image for runtime
-FROM adoptopenjdk:21-jdk-hotspot-bionic AS runtime
+FROM adoptopenjdk:17-jdk-hotspot-bionic AS runtime
 
 # Set the working directory in the container
 WORKDIR /app
