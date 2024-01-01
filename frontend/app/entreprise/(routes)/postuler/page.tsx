@@ -21,7 +21,7 @@ const Postuler = () => {
       }
     };
     getData();
-  }, [data]);
+  }, [data, entrepriseId]);
 
   
   return (

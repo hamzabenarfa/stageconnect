@@ -105,7 +105,7 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
         <DialogHeader>
           <DialogTitle>Modify offer</DialogTitle>
           <DialogDescription>
-          Modify an offer of internship. Click save when you're done.
+          Modify an offer of internship. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 

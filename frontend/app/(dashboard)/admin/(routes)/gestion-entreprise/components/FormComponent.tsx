@@ -71,7 +71,7 @@ const FormComponent: React.FC<ModalProps> = ({
         setAdresse(res.data.adresse);
       });
     }
-  }, []);
+  }, [idEntreprise]);
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-4">
