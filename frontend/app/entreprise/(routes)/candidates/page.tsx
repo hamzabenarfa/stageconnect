@@ -8,7 +8,15 @@ import { Button } from "@/components/ui/button";
 const Candidates = () => {
   const [data, setData] = useState<DataItem[]>([]);
   const [users, setUsers] = useState<any[]>([]); // Assuming the structure of user data
-  const entrepriseId = localStorage.getItem("entreprise") || "";
+  const [entrepriseId, SetentrepriseId] = useState("");
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const entrepriseid = localStorage.getItem("entreprise");
+      if (entrepriseid) { 
+        SetentrepriseId(entrepriseid)
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

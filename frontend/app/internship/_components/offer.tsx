@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
+import { Button } from '@/components/ui/button'; 
 
 
 interface OfferProps {
@@ -22,7 +21,7 @@ const Offer = ({ id,img, company, paid, title, duration, place }: OfferProps) =>
                     height={64}
                     alt={company}
                 /> */}
-                <img src={img} alt={company} className='w-16 h-16 rounded-full' />
+                {/* <img src={img} alt={company} className='w-16 h-16 rounded-full' /> */}
             </div>
             <div className="col-span-2 justify-self-start">
                 <h1 className='font-semibold '>{title}</h1>
