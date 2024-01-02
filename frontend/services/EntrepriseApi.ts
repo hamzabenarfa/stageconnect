@@ -14,13 +14,13 @@ export function getListEntreprises(): any {
 
 export function addEntreprise(
   nom: string,
-  email: string,
-  adresse: string
+  location: string,
+  phone: string,
 ): any {
   const obj = {
     nom: nom,
-    email: email,
-    adresse: adresse,
+    location: location,
+    phone:phone,
   };
   try {
     const result = axios.post(api_url + "api/entreprise", obj);
@@ -33,13 +33,13 @@ export function addEntreprise(
 export function editEntrepriseById(
   id: string,
   nom: string,
-  email: string,
-  adresse: string
+  location: string,
+  phone: string,
 ): any {
   const obj = {
     nom: nom,
-    email: email,
-    adresse: adresse,
+    location: location,
+    phone:phone,
   };
   try {
     const result = axios.put(`${api_url}api/entreprise/${id}`, obj);
