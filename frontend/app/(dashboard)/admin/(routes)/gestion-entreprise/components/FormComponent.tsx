@@ -21,10 +21,10 @@ const FormComponent: React.FC<ModalProps> = ({
   idEntreprise,
   setIdEntreprise,
 }) => {
-  const [email, setEmail] = useState<string>("");
-  const [nom, setNom] = useState<string>("");
-  const [adresse, setAdresse] = useState<string>("");
 
+  const [nom, setNom] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     saveData();
@@ -32,12 +32,12 @@ const FormComponent: React.FC<ModalProps> = ({
 
   const saveData = () => {
     if (idEntreprise) {
-      editEntrepriseById(idEntreprise, nom, email, adresse).then(() => {
+      editEntrepriseById(idEntreprise, nom, location, phone).then(() => {
         const newObj: EntrepriseType = {
           id: idEntreprise,
           nom: nom,
-          email: email,
-          adresse: adresse,
+          location: location,
+          phone: phone,
         };
 
         // Utiliser la méthode map pour créer un nouveau tableau avec l'objet mis à jour
@@ -50,12 +50,12 @@ const FormComponent: React.FC<ModalProps> = ({
         setIdEntreprise("");
       });
     } else {
-      addEntreprise(nom, email, adresse).then(() => {
+      addEntreprise(nom, location, phone).then(() => {
         const newObj = {
           id: "6563b3ec03c9e12c4e1fc67d",
           nom: nom,
-          email: email,
-          adresse: adresse,
+          location: location,
+          phone: phone,
         };
         setEntreprises([...entreprises, newObj]);
         setIsModalOpen(false);
@@ -66,9 +66,9 @@ const FormComponent: React.FC<ModalProps> = ({
   useEffect(() => {
     if (idEntreprise) {
       getEntrepriseById(idEntreprise).then((res: any) => {
-        setEmail(res.data.email);
         setNom(res.data.nom);
-        setAdresse(res.data.adresse);
+        setLocation(res.data.location);
+        setPhone(res.data.phone);
       });
     }
   }, [idEntreprise]);
@@ -97,15 +97,14 @@ const FormComponent: React.FC<ModalProps> = ({
           htmlFor="email"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
-          Email Address
+          Location
         </label>
         <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+         
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="you@example.com"
+          placeholder="location"
         />
       </div>
 
@@ -114,15 +113,15 @@ const FormComponent: React.FC<ModalProps> = ({
           htmlFor="name"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
-          Adresse
+         Phone
         </label>
         <input
           type="text"
           id="name"
-          value={adresse}
-          onChange={(e) => setAdresse(e.target.value)}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="votre adresse"
+          placeholder="votre phone"
         />
       </div>
 

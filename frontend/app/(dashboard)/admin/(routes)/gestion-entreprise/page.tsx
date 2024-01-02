@@ -52,8 +52,8 @@ const Entreprises: React.FC = () => {
           <tr>
             <th>ID</th>
             <th>Nom</th>
-            <th>Adresse</th>
-            <th>Actions</th>
+            <th>Location</th>
+            <th>Phone</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +61,8 @@ const Entreprises: React.FC = () => {
             <tr key={element.id}>
               <td>{element.id}</td>
               <td>{element.nom}</td>
-              <td>{element.adresse}</td>
+              <td>{element.location}</td>
+              <td>{element.phone}</td>
               <td>
                 <button
                   onClick={() => handleEdit(element.id)}
