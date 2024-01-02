@@ -1,6 +1,13 @@
-import {   Hourglass,  CheckSquare } from "lucide-react";
+
+import { Hourglass, CheckSquare, Home } from "lucide-react";
 
 export const routes = [
+    {
+        icon: Home,
+        label: "Dashboard",
+        href: "/student"
+
+    },
     {
         icon: Hourglass,
         label: "Pending internship ",
@@ -11,5 +18,5 @@ export const routes = [
         label: "Accepted internship",
         href: "/student/accepted"
     },
-  
+
 ];

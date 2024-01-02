@@ -2,7 +2,8 @@
 const StudentProfile = () => {
   return (
     <div className="flex">
-      home page
+      Student informtion :
+      
     </div>
   );
 };

@@ -3,16 +3,29 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { getEnterpriseFromUser } from "@/services/Entreprise.service";
-import  Toast  from "react-hot-toast";
+import Toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Setting = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     nom: "",
     location: "",
     phone: "",
   });
   const [entrepriseId, SetentrepriseId] = useState("");
-
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
       const entrepriseid = localStorage.getItem("entreprise");
@@ -54,11 +67,23 @@ const Setting = () => {
         api_url + "api/entreprise/" + Id,
         formData
       );
-      if(response.data){
-          Toast.success("Settings updated successfully")
-          window.location.reload()
+      if (response.data) {
+        Toast.success("Settings updated successfully");
+        window.location.reload();
       }
-      
+    } catch (error) {
+      console.error("Error updating settings:", error);
+    }
+  };
+
+  const { getItem } = useLocalStorage("entreprise");
+  const userid = getItem();
+
+  const deleteAccount = async () => {
+    try {
+      const res = await axios.delete(api_url + "api/user/" + userid);
+      localStorage.removeItem("entreprise")
+      if(res) {window.location.reload();}
     } catch (error) {
       console.error("Error updating settings:", error);
     }
@@ -136,6 +161,26 @@ const Setting = () => {
             <Button type="submit" className="w-full mt-4">
               Change
             </Button>
+
+            <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <Button variant="destructive" className="w-full mt-2">Delete account</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Delete acount</DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to delete this account?
+                </DialogDescription>
+              </DialogHeader>
+              <Button variant="warning" onClick={deleteAccount}>
+                Yes
+              </Button>
+              <Button variant="secondary" onClick={() => setOpen(false)}>
+                No
+              </Button>
+            </DialogContent>
+          </Dialog>
           </div>
         </form>
       </div>
