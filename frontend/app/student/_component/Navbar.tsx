@@ -30,7 +30,7 @@ const Navbar = () => {
           <Logo />
         </Link>
         <div className="hidden md:flex items-center justify-center flex-row gap-2">
-          <Button variant="link">Home</Button>
+         
           <Link href="/internship">
             <Button variant="link">Internship </Button>
           </Link>

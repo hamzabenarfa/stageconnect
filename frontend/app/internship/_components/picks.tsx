@@ -33,6 +33,8 @@ const Picks = () => {
     fetchData();
   }, []);
 
+
+
   return (
     <section className="flex flex-col items-center min-h-screen p-2">
       <div className="flex flex-col items-center w-[60%] justify-center mb-8">

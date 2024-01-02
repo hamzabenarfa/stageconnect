@@ -47,7 +47,8 @@ const Postuler = () => {
           duration={item.duration}
           description={item.description} 
           entrepriseId={""} 
-          studentIds={[]}        />
+          studentIds={[]}        
+          />
       ))}
     
     </div>

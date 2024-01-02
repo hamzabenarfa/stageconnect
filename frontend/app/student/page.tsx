@@ -2,7 +2,7 @@
 const StudentProfile = () => {
   return (
     <div className="flex">
-      Student informtion :
+      pending
       
     </div>
   );

@@ -21,7 +21,9 @@ const buttonVariants = cva(
         success: "bg-emerald-500 text-success-foreground hover:bg-emerald-500/90",
         icon: "bg-transparent text-primary-foreground bg-primary/20 hover:bg-primary/30",
         link: "text-primary underline-offset-4 hover:underline",
-        hero :"border-[2px] border-blue-400 mr-1 text-orange-500 font-semibold px-4 py-2 rounded-xl hover:bg-blue-500 hover:text-white hover:border-blue-500"
+        hero :"border-[2px] border-blue-400 mr-1 text-orange-500 font-semibold px-4 py-2 rounded-xl hover:bg-blue-500 hover:text-white hover:border-blue-500",
+        hero2 :"border-blue-400 mr-1 text-orange-500 font-semibold px-4 py-2 rounded-xl hover:bg-blue-500 hover:text-white hover:border-blue-500"
+
       },
       size: {
         default: "h-10 px-4 py-2",
