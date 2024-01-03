@@ -17,16 +17,14 @@ const Navbar = () => {
     }
   }, []);
   return (
-    <div className="p-4 items-center justify-between md:px-24 flex md:flex-row md:items-center md:justify-around">
-    
+    <div className="p-4 items-center justify-between md:px-40 flex md:flex-row md:items-center md:justify-between">
       <div className="hidden md:flex items-center justify-center flex-row gap-2">
-      <Logo />
+        <Logo />
 
         <Button variant="ghost">Home</Button>
         <Link href="/internship">
           <Button variant="ghost">Internship </Button>
         </Link>
-    
       </div>
       <div className="hidden md:block">
         {studentId ? (
@@ -34,7 +32,7 @@ const Navbar = () => {
             <Button variant="hero">Dashboard </Button>
           </Link>
         ) : (
-          <Link href="/login">           
+          <Link href="/login">
             <Button variant="hero">Login </Button>
           </Link>
         )}
