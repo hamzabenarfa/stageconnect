@@ -47,22 +47,22 @@ const Candidates = () => {
               }
             })
           );
-          setUsers(usersData);
+          //setUsers(usersData);
 
-          // // Filter out duplicate user data based on the user ID
-          // const uniqueUsers = usersData.reduce((acc, user) => {
-          //   if (
-          //     user &&
-          //     !acc.some(
-          //       (existingUser: { id: any }) => existingUser.id === user.id
-          //     )
-          //   ) {
-          //     acc.push(user);
-          //   }
-          //   return acc;
-          // }, [] as any[]);
+          // Filter out duplicate user data based on the user ID
+          const uniqueUsers = usersData.reduce((acc, user) => {
+            if (
+              user &&
+              !acc.some(
+                (existingUser: { id: any }) => existingUser.id === user.id
+              )
+            ) {
+              acc.push(user);
+            }
+            return acc;
+          }, [] as any[]);
 
-          // setUsers(uniqueUsers);
+          setUsers(uniqueUsers);
         }
       } catch (error) {
         console.error(error);
@@ -96,7 +96,19 @@ const Candidates = () => {
               }
             })
           );
-          setAcceptedOffer(usersData);
+          const uniqueUsers = usersData.reduce((acc, user) => {
+            if (
+              user &&
+              !acc.some(
+                (existingUser: { id: any }) => existingUser.id === user.id
+              )
+            ) {
+              acc.push(user);
+            }
+            return acc;
+          }, [] as any[]);
+
+          setAcceptedOffer(uniqueUsers);
         }
       } catch (error) {
         console.error(error);
@@ -121,7 +133,7 @@ const Candidates = () => {
         place: existingOffer.data.place,
         duration: existingOffer.data.duration,
         description: existingOffer.data.description,
-        studentIds: existingOffer.data.studentIds.filter((id) => id !== studentId),
+        studentIds: existingOffer.data.studentIds.filter((id: string) => id !== studentId),
       };
   
       const res = await axios.put(`http://localhost:8080/api/offre/${offerId}`, updatedOffer);
@@ -140,7 +152,7 @@ const Candidates = () => {
       const updatedOffer = {
         ...existingOffer.data,
         acceptedOffer: existingOffer.data.acceptedOffer.filter(
-          (id) => id !== studentId
+          (id: string) => id !== studentId
         ),
       };
 
@@ -185,7 +197,7 @@ const Candidates = () => {
                             size="lg"
                             onClick={() => handleAccept(item.id, user.id)}
                           >
-                            {" "}
+                         
                             Accept
                           </Button>
                           <Button
@@ -194,7 +206,7 @@ const Candidates = () => {
                             className=""
                             onClick={() => handleDelete(item.id, user.id)}
                           >
-                            {" "}
+                          
                             Refuse
                           </Button>
                         </div>

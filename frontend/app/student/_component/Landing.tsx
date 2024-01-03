@@ -14,6 +14,7 @@ const Landing = () => {
       try {
         const id =getItem() ?? "";
         const data = await getUserById(id);
+        //@ts-ignore
         setUserData(data);
       } catch (error) {
         console.log(error);
@@ -40,7 +41,10 @@ const Landing = () => {
               />
             </div>
             <div>
-            <h1 className="text-2xl font-semibold">{userData.student?.firstName || ""}</h1>
+           
+            <h1 className="text-2xl font-semibold">{
+            //@ts-ignore
+            userData.student?.firstName || ""}</h1>
               <p className="text-sm text-gray-500">Student</p>
             </div>
           </div>

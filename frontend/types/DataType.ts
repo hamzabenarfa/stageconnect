@@ -11,8 +11,10 @@ export interface OffreType{
 export interface EntrepriseType {
     id: string,
     nom: string,
-    email: string,
-    adresse: string,
+    email?: string,
+    location: string,
+    adresse?: string,
+    phone:string,
 }
 
 export interface OffreType{

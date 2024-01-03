@@ -15,7 +15,7 @@ const Accepted = () => {
         const allOffers = response.data;
 
         // Filter offers based on the studentId within the acceptedOffer array
-        const filteredOffers = allOffers.filter((offer) => {
+        const filteredOffers = allOffers.filter((offer: { acceptedOffer: (string | undefined)[]; }) => {
           // Check if acceptedOffer is an array and contains the studentId
           return Array.isArray(offer.acceptedOffer) && offer.acceptedOffer.includes(studentId);
         });
