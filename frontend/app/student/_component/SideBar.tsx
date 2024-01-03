@@ -3,7 +3,7 @@
 import { SidebarItem } from "./sidebar-item";
 import {routes} from './_const/routes'
 
-const Sidebar = () => {
+export const Sidebar = () => {
   return (
     <div className="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm">
        <div className="flex flex-col w-full">
@@ -19,5 +19,3 @@ const Sidebar = () => {
     </div>
   );
 };
-
-export default Sidebar;
