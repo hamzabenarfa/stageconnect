@@ -29,7 +29,7 @@ const Postuler = () => {
       }
     };
     getData();
-  }, [data, entrepriseId]);
+  }, [entrepriseId]);
 
   
   return (
@@ -45,10 +45,9 @@ const Postuler = () => {
           title={item.title}
           place={item.place}
           duration={item.duration}
-          description={item.description} 
-          entrepriseId={""} 
-          studentIds={[]}        
-          />
+          description={item.description}
+          entrepriseId={""}
+          studentIds={[]} location={""} phone={""}          />
       ))}
     
     </div>

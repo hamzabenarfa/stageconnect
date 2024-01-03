@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const Landing = () => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
   const { getItem } = useLocalStorage("student");
  
 
@@ -20,7 +20,7 @@ const Landing = () => {
       }
     }
     fetchdata();
-  }, [getItem]);
+  }, []);
   
 
   return (

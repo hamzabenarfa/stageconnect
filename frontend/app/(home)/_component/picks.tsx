@@ -25,8 +25,6 @@ const Picks = () => {
             />
         ))
     }
-    
-  
     </section>
   );
 };

@@ -48,7 +48,7 @@ export function editOffreById(
 ): any {
   const obj = {
     
-   title:title,
+    title:title,
     company:company,
     place:place,
     duration:duration,
@@ -74,7 +74,7 @@ export function deleteOffreById(id: string): any {
 
 export function getOffreById(id: string): any {
   try {
-    const result = axios.get(`${api_url}api/offre/${id}`);
+    const result = axios.get(`${api_url}api/offre/id/${id}`);
     return result;
   } catch (error) {
     console.log(error);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Cherry } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import Toast from "react-hot-toast";
 
 import {
@@ -45,7 +45,7 @@ const Card = ({ id, title, place, duration,description }: DataItem) => {
         <div className="flex gap-2 ">
           <div className="flex items-center justify-center w-16 bg-[#cbf5a9] p-2 rounded-2xl">
             {/* <Image src="/facebook.png" width="50" height="50" alt="google" /> */}
-            <Cherry className="w-6 h-6" />
+            <Briefcase className="w-6 h-6" />
           </div>
           <div className="px-2">
             <p className="font-bold capitalize">{title}</p>
@@ -55,7 +55,7 @@ const Card = ({ id, title, place, duration,description }: DataItem) => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <Modify id={id} title={title} place={place} duration={duration} description={description} entrepriseId={""} studentIds={[]} />
+          <Modify id={id} title={title} place={place} duration={duration} description={description} entrepriseId={""} studentIds={[]} location={""} phone={""} />
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <Button variant="destructive">Delete</Button>

@@ -1,4 +1,5 @@
 export interface DataItem {
+    acceptedOffer: any;
     id: string;
     title: string;
     place: string;

@@ -49,7 +49,7 @@ const Picks = () => {
 
       {offers
         .filter((item) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase())
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
         )
         .map((item) => (
           <Offer

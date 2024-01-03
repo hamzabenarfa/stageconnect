@@ -75,15 +75,14 @@ const Modify = ({ id, title: initialTitle, place: initialPlace, duration: initia
           place,
           duration,
           description,
-          entreprise: {
-            id: "6578003e79ca3766c33afbc4",
-          },
+         
         });
 
         if (res) {
-          await toast.success("Offer added Successfully");
+          await toast.success("Offer modified");
           setLoading(false);
           setOpen(false)
+          window.location.reload();
 
         } else {
           setLoading(false);

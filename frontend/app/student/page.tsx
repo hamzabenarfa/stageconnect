@@ -9,10 +9,6 @@ const StudentProfile = () => {
 
   const { getItem } = useLocalStorage("student");
   const studentIdsString = getItem();
-  console.log(
-    "🚀 ~ file: page.tsx:23 ~ StudentProfile ~ studentIdsString:",
-    studentIdsString
-  );
   useEffect(() => {
     const fetchOffers = async () => {
       try {
