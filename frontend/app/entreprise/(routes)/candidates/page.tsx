@@ -131,6 +131,22 @@ const Candidates = () => {
       console.error("Error accepting offer:", error);
     }
   };
+  const handleDelete = async (offerId: string, studentId: string) => {
+    try {
+      const existingOffer = await getOffreById(offerId);
+
+      const updatedOffer = {
+        ...existingOffer.data,
+        acceptedOffer: existingOffer.data.acceptedOffer.filter((id) => id !== studentId),
+      };
+
+      const res = await axios.put(`http://localhost:8080/api/offre/${offerId}`, updatedOffer);
+
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error deleting accepted offer:", error);
+    }
+  };
 
   return (
     <div className="bg-white p-4 rounded-xl ">
@@ -166,7 +182,9 @@ const Candidates = () => {
                             {" "}
                             Accept
                           </Button>
-                          <Button variant="destructive" size="lg" className="">
+                          <Button variant="destructive" size="lg" className=""
+                                                    onClick={() => handleDelete(item.id, user.id)}
+                                                    >
                             {" "}
                             Refuse
                           </Button>
@@ -190,7 +208,9 @@ const Candidates = () => {
                             {" "}
                             Accept
                           </Button>
-                          <Button variant="destructive" size="lg" className="">
+                          <Button variant="destructive" size="lg" className=""
+                                                    onClick={() => handleDelete(item.id, user.id)}
+                                                    >
                             {" "}
                             Refuse
                           </Button>
