@@ -10,7 +10,7 @@ import { set } from "zod";
 const Candidates = () => {
   const [data, setData] = useState<DataItem[]>([]);
   const [users, setUsers] = useState<any[]>([]);
-  const [acceptedOffer, setAcceptedOffer] = useState<any[]>([]); 
+  const [acceptedOffer, setAcceptedOffer] = useState<any[]>([]);
   const [entrepriseId, SetentrepriseId] = useState("");
 
   useEffect(() => {
@@ -21,7 +21,6 @@ const Candidates = () => {
       }
     }
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,7 +76,6 @@ const Candidates = () => {
     const fetchData = async () => {
       try {
         const res = await getOfferByEntreprise(entrepriseId);
-        
 
         const studentIds = res
           .flatMap((item: { acceptedOffer: string }) => item.acceptedOffer)
@@ -99,7 +97,6 @@ const Candidates = () => {
             })
           );
           setAcceptedOffer(usersData);
-
         }
       } catch (error) {
         console.error(error);
@@ -112,35 +109,45 @@ const Candidates = () => {
   const handleAccept = async (offerId: string, studentId: string) => {
     try {
       const existingOffer = await getOffreById(offerId);
+      
+      const acceptedOfferArray = Array.isArray(existingOffer.data.acceptedOffer)
+        ? existingOffer.data.acceptedOffer
+        : [];
+  
       const updatedOffer = {
         ...existingOffer.data,
-        acceptedOffer: [...existingOffer.data.acceptedOffer, studentId],
+        acceptedOffer: [...acceptedOfferArray, studentId],
         title: existingOffer.data.title,
         place: existingOffer.data.place,
         duration: existingOffer.data.duration,
         description: existingOffer.data.description,
-        studentIds: existingOffer.data.studentIds.filter(id => id !== studentId),
-
+        studentIds: existingOffer.data.studentIds.filter((id) => id !== studentId),
       };
-      const res = await axios.put("http://localhost:8080/api/offre/"+offerId,
-        updatedOffer
-      );
-
-       console.log(res.data);
+  
+      const res = await axios.put(`http://localhost:8080/api/offre/${offerId}`, updatedOffer);
+      if(res){
+        window.location.reload();
+      }
     } catch (error) {
       console.error("Error accepting offer:", error);
     }
   };
+  
   const handleDelete = async (offerId: string, studentId: string) => {
     try {
       const existingOffer = await getOffreById(offerId);
 
       const updatedOffer = {
         ...existingOffer.data,
-        acceptedOffer: existingOffer.data.acceptedOffer.filter((id) => id !== studentId),
+        acceptedOffer: existingOffer.data.acceptedOffer.filter(
+          (id) => id !== studentId
+        ),
       };
 
-      const res = await axios.put(`http://localhost:8080/api/offre/${offerId}`, updatedOffer);
+      const res = await axios.put(
+        `http://localhost:8080/api/offre/${offerId}`,
+        updatedOffer
+      );
 
       console.log(res.data);
     } catch (error) {
@@ -177,21 +184,23 @@ const Candidates = () => {
                           <Button
                             size="lg"
                             onClick={() => handleAccept(item.id, user.id)}
-                            //disabled={item.acceptedOffer.includes(user.id)}
                           >
                             {" "}
                             Accept
                           </Button>
-                          <Button variant="destructive" size="lg" className=""
-                                                    onClick={() => handleDelete(item.id, user.id)}
-                                                    >
+                          <Button
+                            variant="destructive"
+                            size="lg"
+                            className=""
+                            onClick={() => handleDelete(item.id, user.id)}
+                          >
                             {" "}
                             Refuse
                           </Button>
                         </div>
                       </li>
                     ))}
-                   {acceptedOffer
+                  {acceptedOffer
                     .filter((user) => item.acceptedOffer?.includes(user.id))
                     .map((user) => (
                       <li
@@ -202,16 +211,16 @@ const Candidates = () => {
                         <div className="flex gap-2">
                           <Button
                             size="lg"
-                            onClick={() => handleAccept(item.id, user.id)}
                             disabled={item.acceptedOffer?.includes(user.id)}
                           >
-                            {" "}
                             Accept
                           </Button>
-                          <Button variant="destructive" size="lg" className=""
-                                                    onClick={() => handleDelete(item.id, user.id)}
-                                                    >
-                            {" "}
+                          <Button
+                            variant="destructive"
+                            size="lg"
+                            className=""
+                            onClick={() => handleDelete(item.id, user.id)}
+                          >
                             Refuse
                           </Button>
                         </div>
