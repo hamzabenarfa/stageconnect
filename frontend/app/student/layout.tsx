@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Landing from "./_component/Landing";
 import Navbar from "./_component/Navbar";
 import { redirect } from "next/navigation";
-import { Sidebar } from "./_component/sidebar";
+import { Sidebar } from "./_component/Side";
 export default function StudentLayout({
   children,
 }: {
